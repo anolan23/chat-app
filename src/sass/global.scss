@@ -1,4 +1,5 @@
 :root {
+  --color-gray: #828282;
 }
 
 *,
@@ -26,16 +27,39 @@ body {
   color: #333333;
 }
 
-.app {
+input {
+  &::placeholder {
+    color: var(--color-gray);
+  }
+  &:-webkit-autofill {
+    &,
+    &:hover,
+    &:focus,
+    &:active {
+      -webkit-box-shadow: 0 0 0 1000px white inset !important;
+    }
+  }
+}
+
+.signup {
   height: 100vh;
   display: flex;
   align-items: center;
 }
 
+.login {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.profile {
+}
+
 .window {
   display: flex;
   flex-direction: column;
-  max-height: 75vh;
+  max-height: 90vh;
   width: 47.4rem;
   padding: 4.3rem 5.9rem;
   margin: auto;
@@ -46,24 +70,88 @@ body {
   &__heading {
     font-size: 1.8rem;
     font-weight: 600;
+    margin-top: 2.4rem;
+    margin-bottom: 1.6rem;
   }
   &__text {
-    color: #828282;
+    color: var(--color-gray);
+    margin-bottom: 3.2rem;
   }
   &__form {
+    display: grid;
+    gap: 1.6rem;
   }
   &__message {
-    color: #828282;
+    color: var(--color-gray);
     font-size: 1.4rem;
+    text-align: center;
+    margin-top: 3.2rem;
   }
   &__socials {
+    align-self: center;
+    display: grid;
+    grid-auto-flow: column;
+    width: min-content;
+    gap: 2rem;
+    margin: 2.4rem 0;
+    cursor: pointer;
   }
   &__prompt {
+    text-align: center;
+    font-size: 1.4rem;
+    color: var(--color-gray);
   }
 }
 
-.input {
+.input-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #bdbdbd;
+  border-radius: 8px;
+  overflow: hidden;
+
+  &__icon {
+    color: var(--color-gray);
+    margin-left: 1.3rem;
+  }
+  &__input {
+    margin-left: 1.3rem;
+    flex: 1;
+    font-size: 1.6rem;
+    font-weight: 400;
+    border: none;
+    outline: none;
+    height: 4.8rem;
+  }
 }
 
-.button {
+.btn {
+  background: #2f80ed;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  height: 4.6rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  &--extended {
+    width: 100%;
+  }
+}
+
+.link {
+  &,
+  &:link,
+  &:active,
+  &:visited {
+    text-decoration: none;
+    color: #2d9cdb;
+    cursor: pointer;
+  }
+}
+
+.icon {
+  font-size: 20px;
+  user-select: none;
 }
