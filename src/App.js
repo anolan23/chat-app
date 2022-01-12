@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
-
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
+    <div className="app">
+      <div className="window">
+        <span className="window__logo">Logo</span>
+        <span className="window__heading">
+          Join thousands of learners from around the world{' '}
+        </span>
+        <p className="window__text">
+          Master web development by making real-life projects. There are
+          multiple paths for you to choose
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <form className="window__form">
+          <input className="input" type="email" placeholder="Email" />
+          <input className="input" type="password" placeholder="Password" />
+          <button className="button" type="submit"></button>
+        </form>
+        <span className="window__message">
+          or continue with these social profiles
+        </span>
+        <div className="window__socials"></div>
+        <span className="window__prompt">
+          Already a member? <span className="link">Login</span>
+        </span>
+      </div>
     </div>
   );
 }
