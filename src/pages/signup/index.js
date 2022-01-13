@@ -9,14 +9,17 @@ import { ReactComponent as Github } from '../../images/Gihub.svg';
 import { ReactComponent as Google } from '../../images/Google.svg';
 import { ReactComponent as Facebook } from '../../images/Facebook.svg';
 
+import { signup } from '../../api';
+
 function Signup() {
   const formik = useFormik({
     initialValues: {
       email: '',
       password: '',
     },
-    onSubmit(values) {
-      console.log(values);
+    async onSubmit(user) {
+      const result = await signup(user);
+      console.log(result);
     },
   });
   return (
