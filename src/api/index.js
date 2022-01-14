@@ -9,6 +9,15 @@ export async function getUsers() {
   }
 }
 
+export async function getUser(id) {
+  try {
+    const response = await axios.get(`/api/users/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export async function signup(user) {
   try {
     const response = await axios.post('/api/signup', user);
@@ -23,6 +32,6 @@ export async function login(user) {
     const response = await axios.post('/api/login', user);
     return response.data;
   } catch (error) {
-    console.error(error);
+    throw error;
   }
 }

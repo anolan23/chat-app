@@ -4,6 +4,7 @@ const passport = require('passport');
 const jwtStrategy = require('./config/strategy.js');
 const path = require('path');
 const authRouter = require('./routes/auth.js');
+const usersRouter = require('./routes/users.js');
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -15,6 +16,7 @@ app.use(passport.initialize());
 app.use(express.json());
 
 app.use(authRouter);
+app.use(usersRouter);
 
 app.get('/', (req, res) => {
   res.sendFile(html);

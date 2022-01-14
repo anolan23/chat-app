@@ -7,18 +7,24 @@ import { ReactComponent as Twitter } from '../../images/Twitter.svg';
 import { ReactComponent as Github } from '../../images/Gihub.svg';
 import { ReactComponent as Google } from '../../images/Google.svg';
 import { ReactComponent as Facebook } from '../../images/Facebook.svg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { login } from '../../api';
 
 function Login() {
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       email: '',
       password: '',
     },
     async onSubmit(user) {
-      await login(user);
+      try {
+        const result = await login(user);
+        navigate(`/users/${result.id}`);
+      } catch (error) {
+        console.error(error);
+      }
     },
   });
   return (

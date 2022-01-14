@@ -27,6 +27,17 @@ body {
   color: #333333;
 }
 
+h1 {
+  font-size: 3.6rem;
+  font-weight: 400;
+  color: black;
+}
+h2 {
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: black;
+}
+
 input {
   font-family: inherit;
   &::placeholder {
@@ -52,9 +63,6 @@ input {
   height: 100vh;
   display: flex;
   align-items: center;
-}
-
-.profile {
 }
 
 .window {
@@ -127,14 +135,21 @@ input {
 }
 
 .btn {
+  min-width: 10rem;
   background: #2f80ed;
   border-radius: 8px;
   color: white;
+  font-family: inherit;
+  font-size: 1.6rem;
   font-weight: 600;
   height: 4.6rem;
   border: none;
   outline: none;
   cursor: pointer;
+  transition: all 0.3s;
+  &:hover {
+    filter: brightness(90%);
+  }
 
   &--extended {
     width: 100%;
@@ -155,4 +170,119 @@ input {
 .icon {
   font-size: 20px;
   user-select: none;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2.4rem 6.4rem;
+  &__logo {
+    cursor: pointer;
+  }
+}
+
+.user-toggle {
+  display: flex;
+  align-items: center;
+  &__image {
+    height: 3.2rem;
+    width: 3.2rem;
+  }
+  &__name {
+    margin-left: 1.1rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+  &__icon {
+    margin-left: 1.6rem;
+  }
+}
+
+.user {
+  &__avatar {
+    height: 7.2rem;
+    width: 7.2rem;
+  }
+
+  &__headings {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  &__heading-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.4rem 4.8rem;
+    border-bottom: 1px solid #e0e0e0;
+
+    &__text {
+      display: flex;
+      flex-direction: column;
+      &__main {
+        color: black;
+        font-size: 2.4rem;
+        margin-bottom: 4px;
+      }
+      &__sub {
+        font-size: 1.3rem;
+        font-weight: 500;
+        color: var(--color-gray);
+      }
+    }
+    &__action {
+      &__btn {
+        height: auto;
+        padding: 8px 0;
+        border-radius: 1.2rem;
+        background-color: white;
+        color: var(--color-gray);
+        font-weight: 500;
+        border: 1px solid currentColor;
+      }
+    }
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: 850px;
+  border: 1px solid #e0e0e0;
+  border-radius: 1.2rem;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  padding: 1.6rem 0;
+  &:not(:last-child) {
+    border-bottom: 1px solid #e0e0e0;
+  }
+  &__label-box {
+    flex: 1;
+    &__label {
+      margin-left: 4.8rem;
+      text-transform: uppercase;
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: #bdbdbd;
+    }
+  }
+  &__value {
+    flex: 2;
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+}
+
+.avatar {
+  max-width: 200px;
+  max-height: 200px;
+  background-position: center;
+  background-size: cover;
+  border-radius: 8px;
+  background-color: gray;
 }

@@ -1,26 +1,10 @@
 const express = require('express');
-const passport = require('passport');
 const db = require('../db');
 const { compare, hash } = require('bcrypt');
 const cookie = require('cookie');
 const { sign } = require('jsonwebtoken');
 
 const router = express.Router();
-
-router.get('/api/users', async (req, res) => {
-  try {
-    const { rows } = await db.query(
-      `
-    SELECT *
-    FROM users
-    `,
-      []
-    );
-    res.send(rows);
-  } catch (error) {
-    res.status(error.status || 500).send({ error: error.message });
-  }
-});
 
 router.post('/api/signup', async (req, res) => {
   try {

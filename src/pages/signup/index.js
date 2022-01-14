@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 
 import Window from '../../components/Window';
@@ -12,14 +12,19 @@ import { ReactComponent as Facebook } from '../../images/Facebook.svg';
 import { signup } from '../../api';
 
 function Signup() {
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       email: '',
       password: '',
     },
     async onSubmit(user) {
-      const result = await signup(user);
-      console.log(result);
+      try {
+        const result = await signup(user);
+        navigate(`/users/${result.id}`);
+      } catch (error) {
+        console.error(error);
+      }
     },
   });
   return (
