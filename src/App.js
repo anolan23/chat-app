@@ -1,23 +1,26 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import Signup from './pages/signup';
 import Home from './pages/index';
 import Login from './pages/login';
 import User from './pages/users';
-import EditProfile from './pages/users/edit';
-import Navbar from './components/Navbar';
+import EditUser from './pages/users/edit';
 import PageLayout from './components/PageLayout';
+import useUser from './context/user';
 
 function App() {
+  const { user } = useUser();
+  // console.log(user);
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route element={<PageLayout />}>
-          <Route path="/users/:id" element={<User />}>
-            <Route path="edit" element={<EditProfile />} />
-          </Route>
+        <Route element={<PageLayout user={user} />}>
+          <Route path="/users/:id" element={<User />} />
+          <Route path="/users/:id/edit" element={<EditUser user={user} />} />
         </Route>
       </Routes>
     </BrowserRouter>

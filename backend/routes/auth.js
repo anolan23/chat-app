@@ -1,4 +1,5 @@
 const express = require('express');
+const passport = require('passport');
 const db = require('../db');
 const { compare, hash } = require('bcrypt');
 const cookie = require('cookie');
@@ -88,6 +89,23 @@ router.post('/api/login', async (req, res) => {
   } catch (error) {
     res.status(error.status || 500).send({ error: error.message });
   }
+});
+
+router.get(
+  '/api/login',
+  passport.authenticate('jwt', { session: false }),
+  async (req, res) => {
+    try {
+      res.send(req.user);
+    } catch (error) {
+      res.status(error.status || 500).send({ error: error.message });
+    }
+  }
+);
+
+router.post('/api/logout', (req, res) => {
+  res.clearCookie('auth', { path: '/' });
+  res.send({ message: 'logout' });
 });
 
 module.exports = router;

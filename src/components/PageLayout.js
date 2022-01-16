@@ -2,12 +2,12 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from './Navbar';
 
-function PageLayout() {
+function PageLayout({ user }) {
   return (
-    <React.Fragment>
-      <Navbar />
+    <div className="page-layout">
+      <Navbar user={user} />
       <Outlet />
-    </React.Fragment>
+    </div>
   );
 }
 

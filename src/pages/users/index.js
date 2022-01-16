@@ -1,16 +1,20 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import Avatar from '../../components/Avatar';
 import Button from '../../components/Button';
 import Container from '../../components/Container';
 import Row from '../../components/Row';
+import Title from '../../components/Title';
 
 import { getUser } from '../../api';
+import { useAuth } from '../../hooks/useAuth';
 
 function User() {
-  const [userProfile, setUserProfile] = useState(null);
+  const [userProfile, setUserProfile] = useState({});
   const params = useParams();
+  const navigate = useNavigate();
+  const { authorized } = useAuth();
   useEffect(() => {
     start();
     async function start() {
@@ -20,10 +24,21 @@ function User() {
     }
   }, [params.id]);
 
-  if (!userProfile) return <div>Loading...</div>;
+  function renderEditButton() {
+    if (!authorized) return null;
+    return (
+      <Button
+        className="user__heading-row__action__btn"
+        onClick={() => {
+          navigate(`/users/${id}/edit`);
+        }}
+      >
+        Edit
+      </Button>
+    );
+  }
 
-  console.log(userProfile);
-  const { name, photo, email, phone, bio } = userProfile;
+  const { name, photo, email, phone, bio, id } = userProfile;
 
   return (
     <div className="user">
@@ -33,15 +48,11 @@ function User() {
       </div>
       <Container>
         <div className="user__heading-row">
-          <div className="user__heading-row__text">
-            <span className="user__heading-row__text__main">Profile</span>
-            <span className="user__heading-row__text__sub">
-              Some info may be visible to other people
-            </span>
-          </div>
-          <div className="user__heading-row__action">
-            <Button className="user__heading-row__action__btn">Edit</Button>
-          </div>
+          <Title
+            main="Profile"
+            sub="Some info may be visible to other people"
+          />
+          <div className="user__heading-row__action">{renderEditButton()}</div>
         </div>
         <Row label="Photo">
           <Avatar className="user__avatar" src={photo} />

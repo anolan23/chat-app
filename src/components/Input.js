@@ -15,10 +15,12 @@ function Input({
       ) : null}
       <input
         className="input-box__input"
+        id={name}
         type={type}
         name={name}
         placeholder={placeHolder}
         autoComplete="off"
+        spellCheck={false}
         value={value}
         onChange={onChange}
         onBlur={onBlur}
