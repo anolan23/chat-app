@@ -12,8 +12,9 @@ export function useUser() {
     (async function () {
       try {
         const user = await autoLogin();
-        setUser(user);
+        setUser({ ...user, isSignedIn: true });
       } catch (error) {
+        setUser({ isSignedIn: false });
         console.error(error);
       }
     })();
@@ -22,7 +23,7 @@ export function useUser() {
   const signup = async ({ email, password }) => {
     try {
       const user = await apiSignup({ email, password });
-      setUser(user);
+      setUser({ ...user, isSignedIn: true });
       return user;
     } catch (error) {
       throw error;

@@ -6,16 +6,15 @@ import Login from './pages/login';
 import User from './pages/users';
 import EditUser from './pages/users/edit';
 import PageLayout from './components/PageLayout';
-import useUser from './context/user';
+import UserConsumer from './context/user';
 
 function App() {
-  const { user } = useUser();
-  // console.log(user);
+  const { user } = UserConsumer();
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home user={user} />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route element={<PageLayout user={user} />}>

@@ -63,7 +63,13 @@ function Login() {
           or continue with these social profiles
         </span>
         <div className="window__socials">
-          <Google />
+          <Google
+            onClick={() => {
+              window.location.assign(
+                `${process.env.REACT_APP_API_URL}/auth/google`
+              );
+            }}
+          />
           <Facebook />
           <Twitter />
           <Github />
