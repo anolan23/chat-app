@@ -29,7 +29,7 @@ function Signup() {
     },
   });
   return (
-    <div className="signup">
+    <div className="auth">
       <Window
         heading="Join thousands of learners from around the world"
         text="Master web development by making real-life projects. There are
@@ -37,6 +37,7 @@ function Signup() {
       >
         <form onSubmit={formik.handleSubmit} className="window__form">
           <Input
+            className="window__form__input"
             icon="email"
             type="text"
             name="email"
@@ -46,6 +47,7 @@ function Signup() {
             value={formik.values.email}
           />
           <Input
+            className="window__form__input"
             icon="lock"
             type="password"
             name="password"

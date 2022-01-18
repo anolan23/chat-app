@@ -32,10 +32,11 @@ function Login() {
     },
   });
   return (
-    <div className="login">
+    <div className="auth">
       <Window heading="Login">
         <form onSubmit={formik.handleSubmit} className="window__form">
           <Input
+            className="window__form__input"
             icon="email"
             type="text"
             name="email"
@@ -45,6 +46,7 @@ function Login() {
             value={formik.values.email}
           />
           <Input
+            className="window__form__input"
             icon="lock"
             type="password"
             name="password"
