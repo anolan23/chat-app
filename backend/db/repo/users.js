@@ -16,13 +16,13 @@ class Users {
     }
   }
 
-  static async findOrCreate({ photo, name, email, google_id, facebook_id }) {
+  static async findOrCreate({ photo, name, email, google_id }) {
     try {
       const { rows } = await db.query(
         `
         WITH cte AS (
-          INSERT INTO users (email, photo, name, google_id, facebook_id)
-          VALUES ($1, $2, $3, $4, $5)
+          INSERT INTO users (email, photo, name, google_id)
+          VALUES ($1, $2, $3, $4)
           ON CONFLICT (google_id) DO NOTHING
           RETURNING *
        )
@@ -35,7 +35,34 @@ class Users {
        WHERE google_id = $4
          AND NOT EXISTS (SELECT 1 FROM cte);
         `,
-        [email, photo, name, google_id, facebook_id]
+        [email, photo, name, google_id]
+      );
+      return rows[0];
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async FBfindOrCreate({ photo, name, email, facebook_id }) {
+    try {
+      const { rows } = await db.query(
+        `
+        WITH cte AS (
+          INSERT INTO users (email, photo, name, facebook_id)
+          VALUES ($1, $2, $3, $4)
+          ON CONFLICT (facebook_id) DO NOTHING
+          RETURNING *
+       )
+       SELECT *
+       FROM cte
+       WHERE EXISTS (SELECT 1 FROM cte)
+       UNION ALL
+       SELECT *
+       FROM users 
+       WHERE facebook_id = $4
+         AND NOT EXISTS (SELECT 1 FROM cte);
+        `,
+        [email, photo, name, facebook_id]
       );
       return rows[0];
     } catch (error) {
