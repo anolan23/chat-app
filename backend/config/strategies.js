@@ -20,7 +20,7 @@ const googleStrategy = new GoogleStrategy(
       .then((user) => {
         return done(null, user);
       })
-      .catch((err) => done(err, null));
+      .catch((err) => done(err, false));
   }
 );
 
