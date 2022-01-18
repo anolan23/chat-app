@@ -69,7 +69,13 @@ function Signup() {
               );
             }}
           />
-          <Facebook />
+          <Facebook
+            onClick={() => {
+              window.location.assign(
+                `${process.env.REACT_APP_API_URL}/auth/facebook`
+              );
+            }}
+          />
           <Twitter />
           <Github />
         </div>

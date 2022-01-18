@@ -5,7 +5,7 @@ const path = require('path');
 const authRouter = require('./routes/auth.js');
 const usersRouter = require('./routes/users.js');
 const photosRouter = require('./routes/photos.js');
-const { googleStrategy } = require('./config/strategies');
+const { googleStrategy, facebookStrategy } = require('./config/strategies');
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -13,6 +13,7 @@ const html = path.join(__dirname, '..', 'build', 'index.html');
 
 require('./config/passport.js')(passport);
 passport.use(googleStrategy);
+passport.use(facebookStrategy);
 
 app.use(passport.initialize());
 app.use(express.json());

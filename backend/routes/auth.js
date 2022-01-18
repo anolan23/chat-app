@@ -131,4 +131,22 @@ router.get(
   }
 );
 
+router.get(
+  '/auth/facebook',
+  passport.authenticate('facebook', { session: false })
+);
+
+router.get(
+  '/auth/facebook/callback',
+  passport.authenticate('facebook', {
+    failureRedirect: '/login',
+    session: false,
+  }),
+  issueJWT,
+  function (req, res) {
+    // Successful authentication, redirect to user profile.
+    res.redirect(`/users/${req.user.id}`);
+  }
+);
+
 module.exports = router;
