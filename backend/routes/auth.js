@@ -133,7 +133,10 @@ router.get(
 
 router.get(
   '/auth/facebook',
-  passport.authenticate('facebook', { session: false })
+  passport.authenticate('facebook', {
+    scope: ['public_profile', 'email'],
+    session: false,
+  })
 );
 
 router.get(
