@@ -23,7 +23,7 @@ class Users {
         WITH cte AS (
           INSERT INTO users (email, photo, name, google_id)
           VALUES ($1, $2, $3, $4)
-          ON CONFLICT (google_id) DO NOTHING
+          ON CONFLICT (google_id, email) DO NOTHING
           RETURNING *
        )
        SELECT *
@@ -50,7 +50,7 @@ class Users {
         WITH cte AS (
           INSERT INTO users (email, photo, name, facebook_id)
           VALUES ($1, $2, $3, $4)
-          ON CONFLICT (facebook_id) DO NOTHING
+          ON CONFLICT (facebook_id, email) DO NOTHING
           RETURNING *
        )
        SELECT *
