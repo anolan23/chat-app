@@ -29,6 +29,7 @@ const facebookStrategy = new FacebookStrategy(
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
     callbackURL: `${process.env.REACT_APP_API_URL}/auth/facebook/callback`,
+    profileFields: ['id', 'displayName', 'photos', 'email'],
   },
   function (accessToken, refreshToken, profile, done) {
     Users.FBfindOrCreate({
