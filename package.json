@@ -26,7 +26,7 @@
     "web-vitals": "^2.1.3"
   },
   "scripts": {
-    "start": "HTTPS=true nodemon backend/app.js",
+    "start": "node backend/app.js",
     "build": "react-scripts build",
     "dev": "react-scripts start",
     "test": "react-scripts test",
