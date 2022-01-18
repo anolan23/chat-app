@@ -4,16 +4,24 @@ const path = require('path');
 
 const db = require('../db');
 const upload = require('../config/multer.js');
+const { authorize } = require('../config/middlewares');
 
 const router = express.Router();
 
 // passport.authenticate('jwt', { session: false })
 router.patch(
   `/api/users/:id/photo`,
+  passport.authenticate('jwt', { session: false }),
+  authorize,
   upload.single('photo'),
   async (req, res) => {
     try {
       const { id } = req.params;
+      // if (+req.user.id !== +id) {
+      //   const error = new Error('Unauthorized. You are not the owner.');
+      //   error.status = 401;
+      //   throw error;
+      // }
       const photo = `/api/photos/${req.file.filename}`;
       const { rows } = await db.query(
         `

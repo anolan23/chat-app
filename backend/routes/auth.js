@@ -1,9 +1,11 @@
 const express = require('express');
 const passport = require('passport');
-const db = require('../db');
 const { compare, hash } = require('bcrypt');
 const cookie = require('cookie');
 const { sign } = require('jsonwebtoken');
+
+const db = require('../db');
+const { issueJWT } = require('../config/middlewares');
 
 const router = express.Router();
 
@@ -24,7 +26,7 @@ router.post('/api/signup', async (req, res) => {
     const claims = {
       sub: user.id,
     };
-    const jwt = sign(claims, 'pebbles', {
+    const jwt = sign(claims, process.env.JWT_SECRET, {
       expiresIn: '144h',
     });
     res.setHeader(
@@ -69,7 +71,7 @@ router.post('/api/login', async (req, res) => {
       const claims = {
         sub: user.id,
       };
-      const jwt = sign(claims, 'pebbles', {
+      const jwt = sign(claims, process.env.JWT_SECRET, {
         expiresIn: '144h',
       });
       res.setHeader(
@@ -107,5 +109,26 @@ router.post('/api/logout', (req, res) => {
   res.clearCookie('auth', { path: '/' });
   res.send({ message: 'logout' });
 });
+
+router.get(
+  '/auth/google',
+  passport.authenticate('google', {
+    scope: ['profile', 'email'],
+    session: false,
+  })
+);
+
+router.get(
+  '/auth/google/callback',
+  passport.authenticate('google', {
+    failureRedirect: '/login',
+    session: false,
+  }),
+  issueJWT,
+  function (req, res) {
+    // Successful authentication, redirect to user profile.
+    res.redirect(`/users/${req.user.id}`);
+  }
+);
 
 module.exports = router;

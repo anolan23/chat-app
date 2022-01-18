@@ -60,16 +60,16 @@ function EditUser({ user }) {
             sub="Changes will be reflected to every service"
           />
           <div className="edit-user__form__upload">
-            <label className="edit-user__form__upload__label" for="upload">
+            <label className="edit-user__form__upload__label" htmlFor="upload">
               <Avatar
                 className="edit-user__form__upload__label__image"
                 src={user.photo}
               />
-              <span class="material-icons edit-user__form__upload__label__icon">
+              <span className="material-icons edit-user__form__upload__label__icon">
                 photo_camera
               </span>
             </label>
-            <label className="edit-user__form__upload__text" for="upload">
+            <label className="edit-user__form__upload__text" htmlFor="upload">
               change photo
             </label>
             <input id="upload" type="file" onChange={onChange} />

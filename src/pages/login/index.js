@@ -9,19 +9,23 @@ import { ReactComponent as Google } from '../../images/Google.svg';
 import { ReactComponent as Facebook } from '../../images/Facebook.svg';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { login } from '../../api';
+import UserConsumer from '../../context/user';
 
 function Login() {
   const navigate = useNavigate();
+  const { login } = UserConsumer();
   const formik = useFormik({
     initialValues: {
       email: '',
       password: '',
     },
-    async onSubmit(user) {
+    async onSubmit({ email, password }) {
       try {
-        const result = await login(user);
-        navigate(`/users/${result.id}`);
+        const user = await login({
+          email,
+          password,
+        });
+        navigate(`/users/${user.id}`);
       } catch (error) {
         console.error(error);
       }

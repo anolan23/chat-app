@@ -11,9 +11,10 @@ export function useAuth(redirectTo = false) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user.id || !id) return;
-    if (user.id === +id) return setState({ authorized: true });
-    if (redirectTo) navigate(redirectTo);
+    if (!user || !user.id || !id) return;
+    if (+user.id === +id) return setState({ authorized: true });
+    if (redirectTo) navigate(redirectTo, { replace: true });
   }, [user, id, navigate, redirectTo]);
+
   return state;
 }

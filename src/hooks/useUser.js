@@ -1,5 +1,10 @@
 import { useState, useEffect } from 'react';
-import { autoLogin, login as apiLogin, logout as apiLogout } from '../api';
+import {
+  autoLogin,
+  login as apiLogin,
+  logout as apiLogout,
+  signup as apiSignup,
+} from '../api';
 
 export function useUser() {
   const [user, setUser] = useState({});
@@ -14,13 +19,34 @@ export function useUser() {
     })();
   }, []);
 
+  const signup = async ({ email, password }) => {
+    try {
+      const user = await apiSignup({ email, password });
+      setUser(user);
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  };
+
   const login = async ({ email, password }) => {
-    return apiLogin({ email, password });
+    try {
+      const user = await apiLogin({ email, password });
+      setUser(user);
+      return user;
+    } catch (error) {
+      throw error;
+    }
   };
 
   const logout = async () => {
-    return apiLogout();
+    try {
+      await apiLogout();
+      setUser({});
+    } catch (error) {
+      throw error;
+    }
   };
 
-  return { user, setUser, login, logout };
+  return { user, setUser, signup, login, logout };
 }

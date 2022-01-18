@@ -1,4 +1,5 @@
 const JwtStrategy = require('passport-jwt').Strategy;
+
 const cookie = require('cookie');
 
 const Users = require('../db/repo/users.js');
@@ -12,14 +13,14 @@ function cookieExtractor(req) {
   return token;
 }
 
-const options = {
+const jwtStrategyOptions = {
   jwtFromRequest: cookieExtractor,
-  secretOrKey: 'pebbles',
+  secretOrKey: process.env.JWT_SECRET,
 };
 
 module.exports = (passport) => {
   passport.use(
-    new JwtStrategy(options, async (payload, done) => {
+    new JwtStrategy(jwtStrategyOptions, async (payload, done) => {
       try {
         const id = payload.sub;
         const user = await Users.findOne(id);

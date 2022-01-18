@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-import { logout } from '../api';
+import UserConsumer from '../context/user';
 
 function Dropdown({ show, close, user }) {
   const navigate = useNavigate();
+  const { logout } = UserConsumer();
   if (!show) return null;
   return (
     <div className="dropdown">

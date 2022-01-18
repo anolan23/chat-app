@@ -9,19 +9,20 @@ import { ReactComponent as Github } from '../../images/Gihub.svg';
 import { ReactComponent as Google } from '../../images/Google.svg';
 import { ReactComponent as Facebook } from '../../images/Facebook.svg';
 
-import { signup } from '../../api';
+import UserConsumer from '../../context/user';
 
 function Signup() {
+  const { signup } = UserConsumer();
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       email: '',
       password: '',
     },
-    async onSubmit(user) {
+    async onSubmit({ email, password }) {
       try {
-        const result = await signup(user);
-        navigate(`/users/${result.id}`);
+        const user = await signup({ email, password });
+        navigate(`/users/${user.id}`);
       } catch (error) {
         console.error(error);
       }
@@ -61,7 +62,13 @@ function Signup() {
           or continue with these social profiles
         </span>
         <div className="window__socials">
-          <Google />
+          <Google
+            onClick={() => {
+              window.location.assign(
+                `${process.env.REACT_APP_API_URL}/auth/google`
+              );
+            }}
+          />
           <Facebook />
           <Twitter />
           <Github />
