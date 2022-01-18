@@ -144,6 +144,12 @@ router.get(
     failureRedirect: '/login',
     session: false,
   }),
+  (err, req, res, next) => {
+    if (err) {
+      res.redirect('/login');
+    }
+    next();
+  },
   issueJWT,
   function (req, res) {
     // Successful authentication, redirect to user profile.
