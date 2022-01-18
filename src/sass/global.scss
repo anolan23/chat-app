@@ -221,6 +221,12 @@ textarea {
   justify-content: space-between;
   align-items: center;
   padding: 2.4rem 6.4rem;
+  @media only screen and (max-width: 900px) {
+    padding: 2.4rem 2.4rem;
+  }
+  @media only screen and (max-width: 550px) {
+    padding: 1.6rem 2.4rem;
+  }
   &__logo {
     cursor: pointer;
   }
@@ -239,9 +245,15 @@ textarea {
     margin-left: 1.1rem;
     font-size: 1.2rem;
     font-weight: 700;
+    @media only screen and (max-width: 550px) {
+      display: none;
+    }
   }
   &__icon {
     margin-left: 1.6rem;
+    @media only screen and (max-width: 550px) {
+      display: none;
+    }
   }
 }
 
@@ -253,7 +265,16 @@ textarea {
 
   &__headings {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-top: 2.4rem;
+    margin-bottom: 3.2rem;
+    @media only screen and (max-width: 550px) {
+      & h1 {
+        font-size: 2.4rem;
+      }
+      & h2 {
+        font-size: 1.4rem;
+      }
+    }
   }
 
   &__heading-row {
@@ -262,6 +283,10 @@ textarea {
     align-items: center;
     padding: 3.2rem 4.8rem;
     border-bottom: 1px solid #e0e0e0;
+    @media only screen and (max-width: 900px) {
+      padding: 3.2rem 2.4rem;
+      border: none;
+    }
 
     &__action {
       &__btn {
@@ -280,6 +305,7 @@ textarea {
 .title {
   display: flex;
   flex-direction: column;
+  margin-right: 4.8rem;
   &__main {
     color: black;
     font-size: 2.4rem;
@@ -298,15 +324,25 @@ textarea {
   flex-direction: column;
   margin: auto;
   margin-bottom: 6.4rem;
-  width: 850px;
+  width: 700px;
   border: 1px solid #e0e0e0;
   border-radius: 1.2rem;
+  @media only screen and (max-width: 900px) {
+    border: none;
+    width: 500px;
+  }
+  @media only screen and (max-width: 550px) {
+    width: 100%;
+  }
 }
 
 .row {
   display: flex;
   align-items: center;
   padding: 1.6rem 0;
+  @media only screen and (max-width: 900px) {
+    padding: 1.6rem 2.4rem;
+  }
   &:not(:last-child) {
     border-bottom: 1px solid #e0e0e0;
   }
@@ -318,12 +354,19 @@ textarea {
       font-size: 1.3rem;
       font-weight: 500;
       color: #bdbdbd;
+      @media only screen and (max-width: 900px) {
+        margin-left: 0;
+      }
     }
   }
   &__value {
     flex: 2;
     font-size: 1.8rem;
     font-weight: 500;
+    @media only screen and (max-width: 900px) {
+      display: flex;
+      justify-content: flex-end;
+    }
   }
 }
 
@@ -338,9 +381,19 @@ textarea {
 
 .edit-user {
   margin: auto;
+  @media only screen and (max-width: 550px) {
+    margin: 0 2.4rem;
+  }
   &__form {
     padding: 3.2rem 4.8rem;
     max-width: 60%;
+    @media only screen and (max-width: 900px) {
+      width: 100%;
+      max-width: unset;
+    }
+    @media only screen and (max-width: 550px) {
+      padding: 0;
+    }
     & .input-box {
       border: 1px solid #828282;
     }
@@ -393,6 +446,9 @@ textarea {
       margin-bottom: 2.4rem;
       font-size: 1.8rem;
       text-decoration: none;
+      @media only screen and (max-width: 550px) {
+        margin-top: 2.4rem;
+      }
     }
 
     &__icon {
