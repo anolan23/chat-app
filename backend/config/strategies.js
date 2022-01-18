@@ -36,7 +36,6 @@ const facebookStrategy = new FacebookStrategy(
       facebook_id: profile.id,
       photo: profile.photos[0].value,
       name: profile.displayName,
-      email: profile.emails[0].value,
     })
       .then((user) => {
         return done(null, user);
