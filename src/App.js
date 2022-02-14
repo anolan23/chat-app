@@ -9,7 +9,8 @@ import PageLayout from './components/PageLayout';
 import UserConsumer from './context/user';
 
 function App() {
-  const { user } = UserConsumer();
+  const user = UserConsumer();
+  console.log(user);
 
   return (
     <BrowserRouter>

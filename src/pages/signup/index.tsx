@@ -1,28 +1,27 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 
+import UserConsumer from '../../context/user';
 import Window from '../../components/Window';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import { ReactComponent as Twitter } from '../../images/Twitter.svg';
-import { ReactComponent as Github } from '../../images/Gihub.svg';
+import { ReactComponent as Github } from '../../images/Github.svg';
 import { ReactComponent as Google } from '../../images/Google.svg';
 import { ReactComponent as Facebook } from '../../images/Facebook.svg';
 
-import UserConsumer from '../../context/user';
-
 function Signup() {
-  const { signup } = UserConsumer();
+  const user = UserConsumer();
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       email: '',
       password: '',
     },
-    async onSubmit({ email, password }) {
+    async onSubmit(credentials) {
       try {
-        const user = await signup({ email, password });
-        navigate(`/users/${user.id}`);
+        await user.signup(credentials);
+        navigate(`/users/${user.data.id}`);
       } catch (error) {
         console.error(error);
       }
