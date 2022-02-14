@@ -10,6 +10,7 @@ import { ReactComponent as Facebook } from '../../images/Facebook.svg';
 import { Link, useNavigate } from 'react-router-dom';
 
 import UserConsumer from '../../context/user';
+import { Credentials } from '../../types/user';
 
 function Login() {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ function Login() {
       email: '',
       password: '',
     },
-    async onSubmit(credentials) {
+    async onSubmit(credentials: Credentials) {
       try {
         await user.login(credentials);
         navigate(`/users/${user.data.id}`);

@@ -10,6 +10,6 @@ export function UserProvider({ children }) {
   return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 }
 
-export default function UserConsumer() {
+export default function UserConsumer(): User {
   return useContext(UserContext);
 }

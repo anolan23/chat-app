@@ -19,18 +19,17 @@ export interface UserProps {
 export class User {
   data: UserProps = {};
 
-  private set(update: UserProps): void {
+  set(update: UserProps): void {
     Object.assign(this.data, update);
   }
 
-  async autoLogin(): Promise<User> {
+  async autoLogin() {
     try {
       const user = await autoLogin();
       this.set({ ...user, isSignedIn: true });
-      return this;
     } catch (error) {
       this.set({ isSignedIn: false });
-      console.error(error);
+      throw error;
     }
   }
 
@@ -49,9 +48,10 @@ export class User {
     try {
       const { email, password } = credentials;
       const user = await apiLogin({ email, password });
-      this.set(user);
+      this.set({ ...user, isSignedIn: true });
       return user;
     } catch (error) {
+      this.set({ isSignedIn: false });
       throw error;
     }
   }

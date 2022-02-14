@@ -1,4 +1,9 @@
-function Avatar({ src = '/', className }) {
+interface Props {
+  src: string;
+  className: string;
+}
+
+function Avatar({ src = '/', className }: Props) {
   return (
     <div
       className={`avatar ${className}`}

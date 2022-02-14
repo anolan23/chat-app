@@ -1,6 +1,11 @@
 import { ReactComponent as Logo } from '../images/devchallenges.svg';
 
-function Window({ heading = 'Heading', text, children }) {
+interface Props {
+  heading: string;
+  text?: string;
+  children?: any;
+}
+function Window({ heading = 'Heading', text, children }: Props) {
   return (
     <div className="window">
       <span className="window__logo">

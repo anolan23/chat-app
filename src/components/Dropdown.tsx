@@ -1,9 +1,14 @@
 import { useNavigate } from 'react-router-dom';
-import UserConsumer from '../context/user';
+import { User } from '../models/User';
 
-function Dropdown({ show, close, user }) {
+interface Props {
+  show: boolean;
+  close: () => void;
+  user: User;
+}
+
+function Dropdown({ show, close, user }: Props) {
   const navigate = useNavigate();
-  const { logout } = UserConsumer();
   if (!show) return null;
   return (
     <div className="dropdown">
@@ -11,7 +16,7 @@ function Dropdown({ show, close, user }) {
         className="dropdown__item"
         onClick={() => {
           close();
-          navigate(`/users/${user.id}`);
+          navigate(`/users/${user.data.id}`);
         }}
       >
         <span className="material-icons">account_circle</span>
@@ -26,7 +31,7 @@ function Dropdown({ show, close, user }) {
         className="dropdown__item dropdown__item--main"
         onClick={async () => {
           close();
-          await logout();
+          await user.logout();
           navigate(`/login`);
         }}
       >
