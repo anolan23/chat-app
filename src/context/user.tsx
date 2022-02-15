@@ -1,15 +1,22 @@
 import { createContext, useContext } from 'react';
 import { useUser } from '../hooks/useUser';
-import { User } from '../models/User';
+import { User } from '../types';
 
-const UserContext = createContext<User>(null);
+interface Store {
+  user: User;
+}
+
+const UserContext = createContext<Store>(null);
 
 export function UserProvider({ children }) {
   const user = useUser();
+  const store = {
+    user,
+  };
 
-  return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
+  return <UserContext.Provider value={store}>{children}</UserContext.Provider>;
 }
 
-export default function UserConsumer(): User {
+export default function UserConsumer(): Store {
   return useContext(UserContext);
 }

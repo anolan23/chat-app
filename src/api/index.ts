@@ -1,6 +1,6 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import { Credentials } from '../types/user';
-import { UserProps } from '../models/User';
+import { UserData } from '../types';
 
 export async function getUsers() {
   try {
@@ -44,18 +44,18 @@ export async function updatePhoto(userId, photo) {
   }
 }
 
-export async function signup(credentials: Credentials): Promise<UserProps> {
+export async function signup(credentials: Credentials): Promise<UserData> {
   try {
-    const response = await axios.post<UserProps>('/api/signup', credentials);
+    const response = await axios.post<UserData>('/api/signup', credentials);
     return response.data;
   } catch (error) {
     throw error;
   }
 }
 
-export async function login(credentials: Credentials): Promise<UserProps> {
+export async function login(credentials: Credentials): Promise<UserData> {
   try {
-    const response = await axios.post<UserProps>('/api/login', credentials);
+    const response = await axios.post<UserData>('/api/login', credentials);
     return response.data;
   } catch (error) {
     throw error;
@@ -71,9 +71,9 @@ export async function logout() {
   }
 }
 
-export async function autoLogin(): Promise<UserProps> {
+export async function autoLogin(): Promise<UserData> {
   try {
-    const response = await axios.get<UserProps>('/api/login');
+    const response = await axios.get<UserData>('/api/login');
     return response.data;
   } catch (error) {
     throw error;

@@ -1,4 +1,4 @@
-export interface User {
+export interface UserData {
   id?: number;
   photo?: string;
   name?: string;
@@ -6,6 +6,14 @@ export interface User {
   phone?: string;
   email?: string;
   isSignedIn?: boolean;
+}
+
+export interface User {
+  user: UserData;
+  setUser: React.Dispatch<React.SetStateAction<UserData>>;
+  signup: (credentials: Credentials) => Promise<UserData>;
+  login: (credentials: Credentials) => Promise<UserData>;
+  logout: () => Promise<void>;
 }
 
 export interface Credentials {

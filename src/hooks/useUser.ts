@@ -1,22 +1,54 @@
 import { useState, useEffect } from 'react';
-import { User } from '../models/User';
+import {
+  autoLogin,
+  login as apiLogin,
+  logout as apiLogout,
+  signup as apiSignup,
+} from '../api';
+import { Credentials, UserData, User } from '../types';
 
 export function useUser(): User {
-  const user = new User();
-  const [state, setState] = useState<User>(user);
+  const [user, setUser] = useState<UserData>({ isSignedIn: false });
+
   useEffect(() => {
-    const start = async () => {
+    (async function () {
       try {
-        await user.autoLogin();
-        setState(user);
+        const user = await autoLogin();
+        setUser({ ...user, isSignedIn: true });
       } catch (error) {
-        user.set({ isSignedIn: false });
-        setState(user);
-        console.error(error, 'awdawdadwd');
+        console.error(error);
       }
-    };
-    start();
+    })();
   }, []);
 
-  return state;
+  const signup = async (credentials: Credentials): Promise<UserData> => {
+    try {
+      const user = await apiSignup(credentials);
+      setUser({ ...user, isSignedIn: true });
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const login = async (credentials: Credentials): Promise<UserData> => {
+    try {
+      const user = await apiLogin(credentials);
+      setUser({ ...user, isSignedIn: true });
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const logout = async (): Promise<void> => {
+    try {
+      await apiLogout();
+      setUser({ isSignedIn: false });
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  return { user, setUser, signup, login, logout };
 }
