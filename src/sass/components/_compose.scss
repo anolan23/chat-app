@@ -1,3 +1,42 @@
 .compose {
-  background-color: #120f13;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  margin: 3.2rem 7.2rem;
+  background-color: #3c393f;
+  border-radius: 8px;
+
+  & input {
+    flex: 1;
+    margin-left: 1.8rem;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: inherit;
+    font-size: 1.6rem;
+    &::placeholder {
+      font-size: 1.6rem;
+      color: #828282;
+    }
+  }
+
+  &__btn {
+    height: 40px;
+    width: 40px;
+    margin: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2f80ed;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    &:hover {
+      filter: brightness(90%);
+    }
+    &__icon {
+      color: white;
+    }
+  }
 }

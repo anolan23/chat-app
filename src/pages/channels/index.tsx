@@ -1,4 +1,6 @@
 import Message from '../../components/Message';
+import Compose from '../../components/Compose';
+
 function Channels() {
   return (
     <div className="channels">
@@ -45,7 +47,9 @@ function Channels() {
             }}
           />
         </div>
-        <div className="channels__compose">compose</div>
+        <div className="channels__compose">
+          <Compose />
+        </div>
       </main>
     </div>
   );
