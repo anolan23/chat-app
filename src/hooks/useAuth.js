@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import UserConsumer from '../context/user';
+import useStore from '../context/user';
 
 export function useAuth(redirectTo = false) {
   const [state, setState] = useState({
     authorized: false,
   });
-  const { user } = UserConsumer();
+  const { user } = useStore();
   const { id } = useParams();
   const navigate = useNavigate();
 

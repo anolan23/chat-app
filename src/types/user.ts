@@ -9,7 +9,7 @@ export interface UserData {
 }
 
 export interface User {
-  user: UserData;
+  data: UserData;
   setUser: React.Dispatch<React.SetStateAction<UserData>>;
   signup: (credentials: Credentials) => Promise<UserData>;
   login: (credentials: Credentials) => Promise<UserData>;

@@ -6,10 +6,10 @@ import Login from './pages/login';
 import User from './pages/users';
 import EditUser from './pages/users/edit';
 import PageLayout from './components/PageLayout';
-import UserConsumer from './context/user';
+import useStore from './context/user';
 
 function App() {
-  const user = UserConsumer();
+  const user = useStore();
   console.log(user);
 
   return (

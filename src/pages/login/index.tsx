@@ -9,12 +9,12 @@ import { ReactComponent as Google } from '../../images/Google.svg';
 import { ReactComponent as Facebook } from '../../images/Facebook.svg';
 import { Link, useNavigate } from 'react-router-dom';
 
-import UserConsumer from '../../context/user';
+import useStore from '../../context/user';
 import { Credentials } from '../../types/user';
 
 function Login() {
   const navigate = useNavigate();
-  const user = UserConsumer();
+  const { user } = useStore();
   const formik = useFormik({
     initialValues: {
       email: '',

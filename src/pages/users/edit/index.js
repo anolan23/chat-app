@@ -10,14 +10,14 @@ import Title from '../../../components/Title';
 import Avatar from '../../../components/Avatar';
 import { useAuth } from '../../../hooks/useAuth';
 import { updateUser } from '../../../api';
-import UserConsumer from '../../../context/user';
+import useStore from '../../../context/user';
 import { updatePhoto } from '../../../api';
 
 function EditUser({ user }) {
   const { name, bio, phone, email, id } = user;
   const { authorized } = useAuth('/login');
   const navigate = useNavigate();
-  const { setUser } = UserConsumer();
+  const { setUser } = useStore();
 
   const formik = useFormik({
     initialValues: {

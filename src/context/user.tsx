@@ -6,17 +6,23 @@ interface Store {
   user: User;
 }
 
-const UserContext = createContext<Store>(null);
+interface ProviderProps {
+  children: React.ReactNode;
+}
 
-export function UserProvider({ children }) {
+const StoreContext = createContext({} as Store);
+
+export function UserProvider({ children }: ProviderProps) {
   const user = useUser();
   const store = {
     user,
   };
 
-  return <UserContext.Provider value={store}>{children}</UserContext.Provider>;
+  return (
+    <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
+  );
 }
 
-export default function UserConsumer(): Store {
-  return useContext(UserContext);
+export default function useStore(): Store {
+  return useContext(StoreContext);
 }

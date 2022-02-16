@@ -8,13 +8,13 @@ import {
 import { Credentials, UserData, User } from '../types';
 
 export function useUser(): User {
-  const [user, setUser] = useState<UserData>({ isSignedIn: false });
+  const [data, setData] = useState<UserData>({ isSignedIn: false });
 
   useEffect(() => {
     (async function () {
       try {
         const user = await autoLogin();
-        setUser({ ...user, isSignedIn: true });
+        setData({ ...user, isSignedIn: true });
       } catch (error) {
         console.error(error);
       }
@@ -24,7 +24,7 @@ export function useUser(): User {
   const signup = async (credentials: Credentials): Promise<UserData> => {
     try {
       const user = await apiSignup(credentials);
-      setUser({ ...user, isSignedIn: true });
+      setData({ ...user, isSignedIn: true });
       return user;
     } catch (error) {
       throw error;
@@ -34,7 +34,7 @@ export function useUser(): User {
   const login = async (credentials: Credentials): Promise<UserData> => {
     try {
       const user = await apiLogin(credentials);
-      setUser({ ...user, isSignedIn: true });
+      setData({ ...user, isSignedIn: true });
       return user;
     } catch (error) {
       throw error;
@@ -44,11 +44,11 @@ export function useUser(): User {
   const logout = async (): Promise<void> => {
     try {
       await apiLogout();
-      setUser({ isSignedIn: false });
+      setData({ isSignedIn: false });
     } catch (error) {
       throw error;
     }
   };
 
-  return { user, setUser, signup, login, logout };
+  return { data, setUser: setData, signup, login, logout };
 }
