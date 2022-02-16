@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 
-import UserConsumer from '../../context/user';
+import UserConsumer from '../../context';
 import Window from '../../components/Window';
 import Input from '../../components/Input';
 import Button from '../../components/Button';

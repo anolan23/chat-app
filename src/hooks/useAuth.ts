@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate, To } from 'react-router-dom';
-import useStore from '../context/user';
+import useStore from '../context';
 
 interface Authorized {
   authorized: boolean;

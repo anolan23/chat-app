@@ -11,13 +11,22 @@ function Home({ user }: HomeProps) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user || user.data.isSignedIn === undefined) return;
-    if (user.data.isSignedIn === false) return navigate(`/signup`);
-    navigate(`/users/${user.data.id}`);
-  }, [user, navigate]);
+    const { isSignedIn, id } = user.data;
+    if (isSignedIn && id) navigate(`/users/${id}`);
+    else return;
+  }, [user.data, navigate]);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '3.2rem',
+      }}
+    >
+      <h1>Home page</h1>
       <Link to="/signup">Signup</Link>
       <Link to="/login">Login</Link>
     </div>

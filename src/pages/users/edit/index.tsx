@@ -10,7 +10,7 @@ import Title from '../../../components/Title';
 import Avatar from '../../../components/Avatar';
 import { useAuth } from '../../../hooks/useAuth';
 import { updateUser } from '../../../api';
-import useStore from '../../../context/user';
+import useStore from '../../../context';
 import { updatePhoto } from '../../../api';
 import { User } from '../../../types';
 

@@ -10,8 +10,6 @@ interface Props {
 }
 
 function UserToggle({ user }: Props) {
-  console.log(user);
-  console.log(user.data);
   const { photo = '/', name = 'Sign up' } = user.data;
   const [show, setShow] = useState<boolean>(false);
   const toggleRef = useRef<HTMLDivElement>(null);

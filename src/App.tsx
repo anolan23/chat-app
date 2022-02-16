@@ -6,11 +6,10 @@ import Login from './pages/login';
 import User from './pages/users';
 import EditUser from './pages/users/edit';
 import PageLayout from './components/PageLayout';
-import useStore from './context/user';
+import useStore from './context';
 
 function App() {
   const { user } = useStore();
-
   return (
     <BrowserRouter>
       <Routes>

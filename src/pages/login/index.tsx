@@ -9,7 +9,7 @@ import { ReactComponent as Google } from '../../images/Google.svg';
 import { ReactComponent as Facebook } from '../../images/Facebook.svg';
 import { Link, useNavigate } from 'react-router-dom';
 
-import useStore from '../../context/user';
+import useStore from '../../context';
 import { Credentials } from '../../types/user';
 
 function Login() {
@@ -22,8 +22,9 @@ function Login() {
     },
     async onSubmit(credentials: Credentials) {
       try {
-        await user.login(credentials);
-        navigate(`/users/${user.data.id}`);
+        const userData = await user.login(credentials);
+        if (!userData.id) return;
+        navigate(`/users/${userData.id}`);
       } catch (error) {
         console.error(error);
       }

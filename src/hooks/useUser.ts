@@ -8,7 +8,7 @@ import {
 import { Credentials, UserData, User } from '../types';
 
 export function useUser(): User {
-  const [data, setData] = useState<UserData>({ isSignedIn: false });
+  const [data, setData] = useState<UserData>({});
 
   useEffect(() => {
     (async function () {
@@ -16,6 +16,7 @@ export function useUser(): User {
         const user = await autoLogin();
         setData({ ...user, isSignedIn: true });
       } catch (error) {
+        setData({ isSignedIn: false });
         console.error(error);
       }
     })();
