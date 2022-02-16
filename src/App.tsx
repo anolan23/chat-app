@@ -7,6 +7,7 @@ import User from './pages/users';
 import EditUser from './pages/users/edit';
 import PageLayout from './components/PageLayout';
 import useStore from './context';
+import Channels from './pages/channels';
 
 function App() {
   const { user } = useStore();
@@ -14,6 +15,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home user={user} />} />
+        <Route path="/channels/:id" element={<Channels />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route element={<PageLayout user={user} />}>
