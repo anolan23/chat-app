@@ -10,12 +10,6 @@ interface HomeProps {
 function Home({ user }: HomeProps) {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const { isSignedIn, id } = user.data;
-    if (isSignedIn && id) navigate(`/users/${id}`);
-    else return;
-  }, [user.data, navigate]);
-
   return (
     <div
       style={{

@@ -232,31 +232,6 @@ textarea {
   }
 }
 
-.user-toggle {
-  position: relative;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  &__image {
-    height: 3.2rem;
-    width: 3.2rem;
-  }
-  &__name {
-    margin-left: 1.1rem;
-    font-size: 1.2rem;
-    font-weight: 700;
-    @media only screen and (max-width: 550px) {
-      display: none;
-    }
-  }
-  &__icon {
-    margin-left: 1.6rem;
-    @media only screen and (max-width: 550px) {
-      display: none;
-    }
-  }
-}
-
 .user {
   &__avatar {
     height: 7.2rem;
