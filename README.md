@@ -1,4 +1,4 @@
-# auth
+# auth-ts
 This project is a template for projects requiring an authentication flow.
 
 ## Built with
