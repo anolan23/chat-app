@@ -1,5 +1,5 @@
 # auth
-This project demonstrates an authentication flow for a typical web app. It allows for register and signIn with email/password or with Google OAuth2.0. Like most modern web applications, I elected not to use server-side sessions. Instead, session state is stored in a jwt within a cookie that is stored client side. For each request, the server will verify the jwt before proceeding with the request.
+This project is a template for projects requiring an authentication flow.
 
 ## Built with
 Reactjs,
