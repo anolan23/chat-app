@@ -29,7 +29,7 @@ export async function updateUser(id: number, cols: any) {
   }
 }
 
-export async function updatePhoto(userId: number, photo: string) {
+export async function updatePhoto(userId: number, photo: File) {
   try {
     const data = new FormData();
     data.append('photo', photo);

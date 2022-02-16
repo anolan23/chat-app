@@ -1,8 +1,14 @@
 import { useNavigate } from 'react-router-dom';
+
 import { ReactComponent as Logo } from '../images/devchallenges.svg';
 import UserToggle from './UserToggle';
+import { User } from '../types';
 
-function Navbar({ user }) {
+interface Props {
+  user: User;
+}
+
+function Navbar({ user }: Props) {
   const navigate = useNavigate();
   return (
     <nav className="navbar">

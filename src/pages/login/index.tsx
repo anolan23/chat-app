@@ -38,7 +38,7 @@ function Login() {
             icon="email"
             type="text"
             name="email"
-            placeHolder="Email"
+            placeholder="Email"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.email}
@@ -48,7 +48,7 @@ function Login() {
             icon="lock"
             type="password"
             name="password"
-            placeHolder="Password"
+            placeholder="Password"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.password}

@@ -1,4 +1,9 @@
-function Row({ label, children }) {
+interface Props {
+  label: string;
+  children: React.ReactNode;
+}
+
+function Row({ label, children }: Props) {
   return (
     <div className="row">
       <div className="row__label-box">

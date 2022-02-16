@@ -9,8 +9,7 @@ import PageLayout from './components/PageLayout';
 import useStore from './context/user';
 
 function App() {
-  const user = useStore();
-  console.log(user);
+  const { user } = useStore();
 
   return (
     <BrowserRouter>

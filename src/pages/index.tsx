@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
-import { User } from '../models/User';
+import { User } from '../types';
 
 interface HomeProps {
   user: User;

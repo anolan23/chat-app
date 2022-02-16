@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { User } from '../models/User';
+import { User } from '../types';
 
 interface Props {
   show: boolean;

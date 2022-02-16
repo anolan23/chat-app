@@ -1,13 +1,17 @@
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+  icon?: string;
+}
+
 function Input({
   icon,
   type,
   name,
-  placeHolder,
+  placeholder,
   value,
   onChange,
   onBlur,
   className,
-}) {
+}: Props) {
   return (
     <div className={`input-box ${className}`}>
       {icon ? (
@@ -18,7 +22,7 @@ function Input({
         id={name}
         type={type}
         name={name}
-        placeholder={placeHolder}
+        placeholder={placeholder}
         autoComplete="off"
         spellCheck={false}
         value={value}

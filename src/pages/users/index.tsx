@@ -9,9 +9,10 @@ import Title from '../../components/Title';
 
 import { getUser } from '../../api';
 import { useAuth } from '../../hooks/useAuth';
+import { UserData } from '../../types';
 
 function User() {
-  const [userProfile, setUserProfile] = useState({});
+  const [userProfile, setUserProfile] = useState<UserData>({});
   const params = useParams();
   const navigate = useNavigate();
   const { authorized } = useAuth();
@@ -19,7 +20,7 @@ function User() {
     start();
     async function start() {
       if (!params.id) return;
-      const user = await getUser(params.id);
+      const user = await getUser(+params.id);
       setUserProfile(user);
     }
   }, [params.id]);
@@ -38,7 +39,7 @@ function User() {
     );
   }
 
-  const { name, photo, email, phone, bio, id } = userProfile;
+  const { name, photo = '/', email, phone, bio, id } = userProfile;
 
   return (
     <div className="user">

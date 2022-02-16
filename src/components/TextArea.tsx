@@ -1,11 +1,20 @@
-function TextArea({ name, placeHolder, value, onChange, onBlur, className }) {
+interface Props extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
+
+function TextArea({
+  name,
+  placeholder,
+  value,
+  onChange,
+  onBlur,
+  className,
+}: Props) {
   return (
     <textarea
       className={`input-box ${className}`}
       id={name}
       name={name}
       rows={3}
-      placeholder={placeHolder}
+      placeholder={placeholder}
       autoComplete="off"
       spellCheck={false}
       value={value}

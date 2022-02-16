@@ -3,13 +3,15 @@ import { useState, useRef, useCallback } from 'react';
 import Avatar from './Avatar';
 import Dropdown from './Dropdown';
 import { useOutsideClick } from '../hooks/useOutsideClick';
-import { User } from '../models/User';
+import { User } from '../types';
 
 interface Props {
   user: User;
 }
 
 function UserToggle({ user }: Props) {
+  console.log(user);
+  console.log(user.data);
   const { photo = '/', name = 'Sign up' } = user.data;
   const [show, setShow] = useState<boolean>(false);
   const toggleRef = useRef<HTMLDivElement>(null);

@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../../components/Button';
 
 import Container from '../../../components/Container';
@@ -12,12 +12,19 @@ import { useAuth } from '../../../hooks/useAuth';
 import { updateUser } from '../../../api';
 import useStore from '../../../context/user';
 import { updatePhoto } from '../../../api';
+import { User } from '../../../types';
 
-function EditUser({ user }) {
-  const { name, bio, phone, email, id } = user;
+interface Props {
+  user: User;
+}
+
+function EditUser({ user: userProfile }: Props) {
+  const { name, bio, phone, email, id, photo = '/' } = userProfile.data;
   const { authorized } = useAuth('/login');
   const navigate = useNavigate();
-  const { setUser } = useStore();
+  const {
+    user: { setUser },
+  } = useStore();
 
   const formik = useFormik({
     initialValues: {
@@ -28,6 +35,7 @@ function EditUser({ user }) {
     },
     async onSubmit(cols) {
       try {
+        if (!id) return;
         const updatedUser = await updateUser(id, cols);
         setUser(updatedUser);
         navigate(`/users/${id}`);
@@ -38,21 +46,22 @@ function EditUser({ user }) {
     enableReinitialize: true,
   });
 
-  const onChange = async (e) => {
-    const [photo] = e.target.files;
-    const newUser = await updatePhoto(user.id, photo);
+  const onChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const photo = event.target.files?.item(0);
+    if (!photo || !id) return;
+    const newUser = await updatePhoto(id, photo);
     setUser(newUser);
   };
 
   if (!authorized) return <div>Loading...</div>;
   return (
     <div className="edit-user">
-      <Link to={-1} className="edit-user__back">
+      <div onClick={() => navigate(-1)} className="edit-user__back">
         <span className="material-icons edit-user__back__icon">
           chevron_left
         </span>
         <span className="edit-user__back__text">Back</span>
-      </Link>
+      </div>
       <Container>
         <form onSubmit={formik.handleSubmit} className="edit-user__form">
           <Title
@@ -63,7 +72,7 @@ function EditUser({ user }) {
             <label className="edit-user__form__upload__label" htmlFor="upload">
               <Avatar
                 className="edit-user__form__upload__label__image"
-                src={user.photo}
+                src={photo}
               />
               <span className="material-icons edit-user__form__upload__label__icon">
                 photo_camera
@@ -78,7 +87,7 @@ function EditUser({ user }) {
             <Input
               type="text"
               name="name"
-              placeHolder="Enter your name..."
+              placeholder="Enter your name..."
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.name}
@@ -87,7 +96,7 @@ function EditUser({ user }) {
           <InputGroup labelText="Bio" htmlFor="bio">
             <TextArea
               name="bio"
-              placeHolder="Enter your bio..."
+              placeholder="Enter your bio..."
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.bio}
@@ -97,7 +106,7 @@ function EditUser({ user }) {
             <Input
               type="text"
               name="phone"
-              placeHolder="Enter your phone..."
+              placeholder="Enter your phone..."
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.phone}
@@ -107,7 +116,7 @@ function EditUser({ user }) {
             <Input
               type="text"
               name="email"
-              placeHolder="Enter your email..."
+              placeholder="Enter your email..."
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}

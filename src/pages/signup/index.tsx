@@ -11,7 +11,7 @@ import { ReactComponent as Google } from '../../images/Google.svg';
 import { ReactComponent as Facebook } from '../../images/Facebook.svg';
 
 function Signup() {
-  const user = UserConsumer();
+  const { user } = UserConsumer();
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
@@ -40,7 +40,7 @@ function Signup() {
             icon="email"
             type="text"
             name="email"
-            placeHolder="Email"
+            placeholder="Email"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.email}
@@ -50,7 +50,7 @@ function Signup() {
             icon="lock"
             type="password"
             name="password"
-            placeHolder="Password"
+            placeholder="Password"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.password}

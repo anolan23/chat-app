@@ -1,4 +1,9 @@
-function Title({ main, sub }) {
+interface Props {
+  main: string;
+  sub: string;
+}
+
+function Title({ main, sub }: Props) {
   return (
     <div className="title">
       <span className="title__main">{main}</span>
