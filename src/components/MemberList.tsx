@@ -1,7 +1,6 @@
 import React from 'react';
 import { UserData } from '../types';
 import UserItem from './UserItem';
-import { SidebarMode } from '../types';
 const members = [
   {
     name: 'Aaron Nolan',

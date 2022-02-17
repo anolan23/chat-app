@@ -5,12 +5,15 @@
   &__bar {
     display: flex;
     align-items: center;
+    padding: 0 3.2rem;
+    font-weight: 700;
+
     box-shadow: 0px 4px 4px 0px #00000040;
     height: 6rem;
-    cursor: pointer;
   }
   &__content {
     flex: 1;
+    padding: 2.4rem 3.2rem;
   }
   &__footer {
     display: flex;
@@ -43,8 +46,8 @@
 .member-list-sidebar {
   &__bar {
     display: flex;
-    padding: 0 3.2rem;
     align-items: center;
+    cursor: pointer;
 
     &__icon {
       font-size: 3.2rem;
@@ -57,8 +60,6 @@
   &__content {
     display: flex;
     flex-direction: column;
-
-    padding: 2.4rem 3.2rem;
   }
   &__description {
     display: flex;
@@ -83,5 +84,48 @@
       flex-direction: column;
       margin-top: 1.6rem;
     }
+  }
+}
+
+.channel-list-sidebar {
+  &__bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    &__title {
+    }
+    &__btn {
+      height: 32px;
+      width: 32px;
+      border: none;
+      border-radius: 8px;
+      background-color: $color-chat;
+      color: inherit;
+      cursor: pointer;
+      &:hover {
+        filter: brightness(120%);
+      }
+    }
+  }
+
+  &__search {
+    background-color: #3c393f;
+    border: none;
+    color: white;
+    & span {
+      color: inherit;
+    }
+    & input {
+      color: inherit;
+      &::placeholder {
+        color: #828282;
+        font-size: 1.4rem;
+      }
+    }
+  }
+
+  &__channels {
+    margin-top: 1.6rem;
   }
 }
