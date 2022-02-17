@@ -1,5 +1,6 @@
 .channels {
   height: 100vh;
+  overflow: hidden;
   display: grid;
   grid-template-columns: 324px 1fr;
   font-size: 1.8rem;

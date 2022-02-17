@@ -5,13 +5,14 @@ interface Props {
   show: boolean;
   close: () => void;
   user: User;
+  direction?: 'up' | 'down';
 }
 
-function Dropdown({ show, close, user }: Props) {
+function Dropdown({ show, close, user, direction = 'down' }: Props) {
   const navigate = useNavigate();
   if (!show) return null;
   return (
-    <div className="dropdown">
+    <div className={`dropdown ${direction === 'up' ? 'dropdown--up' : ''}`}>
       <div
         className="dropdown__item"
         onClick={() => {
@@ -22,7 +23,13 @@ function Dropdown({ show, close, user }: Props) {
         <span className="material-icons">account_circle</span>
         <span className="dropdown__item__text">My Profile</span>
       </div>
-      <div className="dropdown__item">
+      <div
+        className="dropdown__item"
+        onClick={async () => {
+          close();
+          navigate(`/channels`);
+        }}
+      >
         <span className="material-icons">group</span>
         <span className="dropdown__item__text">Group Chat</span>
       </div>

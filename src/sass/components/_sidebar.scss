@@ -1,3 +1,87 @@
 .sidebar {
+  display: flex;
+  flex-direction: column;
   background-color: #120f13;
+  &__bar {
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 4px 4px 0px #00000040;
+    height: 6rem;
+    cursor: pointer;
+  }
+  &__content {
+    flex: 1;
+  }
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 75px;
+    background-color: #0b090c;
+    &__toggle {
+      width: 100%;
+      padding: 0 3.2rem;
+
+      & .user-toggle__image {
+        height: 42px;
+        width: 42px;
+      }
+      & .user-toggle__name {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #828282;
+        margin-left: 3.2rem;
+      }
+      & .user-toggle__icon {
+        color: #bdbdbd;
+        margin-left: auto;
+      }
+    }
+  }
+}
+
+.member-list-sidebar {
+  &__bar {
+    display: flex;
+    padding: 0 3.2rem;
+    align-items: center;
+
+    &__icon {
+      font-size: 3.2rem;
+    }
+    &__title {
+      margin-left: 1.6rem;
+      font-weight: 700;
+    }
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+
+    padding: 2.4rem 3.2rem;
+  }
+  &__description {
+    display: flex;
+    flex-direction: column;
+    &__title {
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 1.8rem;
+    }
+    &__text {
+      font-weight: 400;
+    }
+  }
+  &__members {
+    margin-top: 4rem;
+    &__title {
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    &__list {
+      display: flex;
+      flex-direction: column;
+      margin-top: 1.6rem;
+    }
+  }
 }

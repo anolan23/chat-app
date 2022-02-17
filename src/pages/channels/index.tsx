@@ -1,10 +1,10 @@
 import Message from '../../components/Message';
 import Compose from '../../components/Compose';
-
+import Sidebar from '../../components/Sidebar';
 function Channels() {
   return (
     <div className="channels">
-      <aside className="sidebar">sidebar</aside>
+      <Sidebar />
       <main className="channels__main">
         <div className="channels__bar">
           <span className="channels__bar__text">Front-end developers</span>

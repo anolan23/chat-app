@@ -1,9 +1,10 @@
-@import 'base/base';
 @import 'base/variables';
+@import 'base/base';
 
 @import 'components/user-toggle';
 @import 'components/sidebar';
 @import 'components/message';
 @import 'components/compose';
+@import 'components/user-item';
 
 @import 'pages/channels';

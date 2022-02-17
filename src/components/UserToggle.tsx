@@ -7,9 +7,11 @@ import { User } from '../types';
 
 interface Props {
   user: User;
+  className?: string;
+  direction?: 'up' | 'down';
 }
 
-function UserToggle({ user }: Props) {
+function UserToggle({ user, className, direction = 'down' }: Props) {
   const { photo = '/', name = 'Sign up' } = user.data;
   const [show, setShow] = useState<boolean>(false);
   const toggleRef = useRef<HTMLDivElement>(null);
@@ -21,11 +23,20 @@ function UserToggle({ user }: Props) {
   useOutsideClick(toggleRef, onClickOutside);
 
   return (
-    <div className="user-toggle" onClick={() => setShow(!show)} ref={toggleRef}>
+    <div
+      className={`user-toggle ${className || ''}`}
+      onClick={() => setShow(!show)}
+      ref={toggleRef}
+    >
       <Avatar className="user-toggle__image" src={photo} />
       <span className="user-toggle__name">{name || 'Sign up'}</span>
       <span className="material-icons user-toggle__icon">arrow_drop_down</span>
-      <Dropdown show={show} close={() => setShow(false)} user={user} />
+      <Dropdown
+        show={show}
+        close={() => setShow(false)}
+        user={user}
+        direction={direction}
+      />
     </div>
   );
 }
