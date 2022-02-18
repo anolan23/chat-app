@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { User } from '../types';
+import { useActions } from '../hooks/useActions';
 
 interface Props {
   show: boolean;
@@ -9,6 +10,7 @@ interface Props {
 }
 
 function Dropdown({ show, close, user, direction = 'down' }: Props) {
+  const { logout } = useActions();
   const navigate = useNavigate();
   if (!show) return null;
   return (
@@ -17,7 +19,7 @@ function Dropdown({ show, close, user, direction = 'down' }: Props) {
         className="dropdown__item"
         onClick={() => {
           close();
-          navigate(`/users/${user.data.id}`);
+          navigate(`/users/${user.id}`);
         }}
       >
         <span className="material-icons">account_circle</span>
@@ -38,7 +40,7 @@ function Dropdown({ show, close, user, direction = 'down' }: Props) {
         className="dropdown__item dropdown__item--main"
         onClick={async () => {
           close();
-          await user.logout();
+          await logout();
           navigate(`/login`);
         }}
       >

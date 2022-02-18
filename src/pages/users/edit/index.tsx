@@ -9,22 +9,18 @@ import TextArea from '../../../components/TextArea';
 import Title from '../../../components/Title';
 import Avatar from '../../../components/Avatar';
 import { useAuth } from '../../../hooks/useAuth';
-import { updateUser } from '../../../actions';
-import useStore from '../../../context';
-import { updatePhoto } from '../../../actions';
 import { User } from '../../../types';
+import { useActions } from '../../../hooks/useActions';
 
 interface Props {
   user: User;
 }
 
-function EditUser({ user: userProfile }: Props) {
-  const { name, bio, phone, email, id, photo = '/' } = userProfile.data;
+function EditUser({ user }: Props) {
+  const { name, bio, phone, email, id, photo = '/' } = user;
   const { authorized } = useAuth('/login');
   const navigate = useNavigate();
-  const {
-    user: { setUser },
-  } = useStore();
+  const { updateUser, updatePhoto } = useActions();
 
   const formik = useFormik({
     initialValues: {
@@ -36,8 +32,7 @@ function EditUser({ user: userProfile }: Props) {
     async onSubmit(cols) {
       try {
         if (!id) return;
-        const updatedUser = await updateUser(id, cols);
-        setUser(updatedUser);
+        await updateUser(id, cols);
         navigate(`/users/${id}`);
       } catch (error) {
         console.error(error);
@@ -49,8 +44,7 @@ function EditUser({ user: userProfile }: Props) {
   const onChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const photo = event.target.files?.item(0);
     if (!photo || !id) return;
-    const newUser = await updatePhoto(id, photo);
-    setUser(newUser);
+    await updatePhoto(id, photo);
   };
 
   if (!authorized) return <div>Loading...</div>;

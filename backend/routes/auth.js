@@ -84,6 +84,7 @@ router.post('/api/login', async (req, res) => {
           path: '/',
         })
       );
+      delete user.password;
       res.send(user);
     } else {
       res.status(401).send({ status: false, message: 'Invalid password' });

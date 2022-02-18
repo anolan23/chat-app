@@ -11,10 +11,12 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import useStore from '../../context';
 import { Credentials } from '../../types/user';
+import { useActions } from '../../hooks/useActions';
 
 function Login() {
   const navigate = useNavigate();
-  const { user } = useStore();
+  const [{ user }] = useStore();
+  const { login } = useActions();
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -22,9 +24,10 @@ function Login() {
     },
     async onSubmit(credentials: Credentials) {
       try {
-        const userData = await user.login(credentials);
-        if (!userData.id) return;
-        navigate(`/users/${userData.id}`);
+        await login(credentials);
+        console.log(user);
+        if (!user.id) return;
+        navigate(`/users/${user.id}`);
       } catch (error) {
         console.error(error);
       }

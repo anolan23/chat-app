@@ -5,17 +5,6 @@ import axios from 'axios';
 import { Credentials } from '../types/user';
 import { Action, ActionType, User } from '../types';
 
-function fetchUser(dispatch: React.Dispatch<Action>) {
-  return async (id: number) => {
-    try {
-      const response = await axios.get<User>(`/api/users/${id}`);
-      dispatch({ type: ActionType.fetchUser, payload: response.data });
-    } catch (error) {
-      throw error;
-    }
-  };
-}
-
 function updateUser(dispatch: React.Dispatch<Action>) {
   return async (id: number, cols: any) => {
     try {
@@ -97,7 +86,6 @@ export function useActions() {
 
   return {
     autoLogin: autoLogin(dispatch),
-    fetchUser: fetchUser(dispatch),
     updateUser: updateUser(dispatch),
     updatePhoto: updatePhoto(dispatch),
     signup: signup(dispatch),

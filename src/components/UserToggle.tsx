@@ -12,7 +12,7 @@ interface Props {
 }
 
 function UserToggle({ user, className, direction = 'down' }: Props) {
-  const { photo = '/', name = 'Sign up' } = user.data;
+  const { photo = '/', name = 'Sign up' } = user;
   const [show, setShow] = useState<boolean>(false);
   const toggleRef = useRef<HTMLDivElement>(null);
 

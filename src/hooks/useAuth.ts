@@ -10,13 +10,13 @@ export function useAuth(redirectTo: boolean | To = false): Authorized {
   const [state, setState] = useState<Authorized>({
     authorized: false,
   });
-  const { user } = useStore();
+  const [{ user }] = useStore();
   const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user || !user.data.id || !id) return;
-    if (user.data.id === +id) return setState({ authorized: true });
+    if (!user || !user.id || !id) return;
+    if (user.id === +id) return setState({ authorized: true });
     if (redirectTo && typeof redirectTo !== 'boolean') {
       navigate(redirectTo, { replace: true });
     }

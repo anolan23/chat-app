@@ -10,7 +10,7 @@ function ChannelItem({ channel }: Props) {
     <div className="channel-item">
       <div className="channel-item__logo">
         <span className="channel-item__logo__abbrev">
-          {getChannelAbbrev(channel.name)}
+          {getChannelAbbrev(channel.name || '')}
         </span>
       </div>
       <span className="channel-item__name">{channel.name}</span>

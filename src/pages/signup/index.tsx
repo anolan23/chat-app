@@ -9,9 +9,11 @@ import { ReactComponent as Twitter } from '../../images/Twitter.svg';
 import { ReactComponent as Github } from '../../images/Github.svg';
 import { ReactComponent as Google } from '../../images/Google.svg';
 import { ReactComponent as Facebook } from '../../images/Facebook.svg';
+import { useActions } from '../../hooks/useActions';
 
 function Signup() {
-  const { user } = UserConsumer();
+  const [{ user }] = UserConsumer();
+  const { signup } = useActions();
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
@@ -20,8 +22,9 @@ function Signup() {
     },
     async onSubmit(credentials) {
       try {
-        await user.signup(credentials);
-        navigate(`/users/${user.data.id}`);
+        await signup(credentials);
+        if (!user.id) return;
+        navigate(`/users/${user.id}`);
       } catch (error) {
         console.error(error);
       }

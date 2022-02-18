@@ -6,7 +6,7 @@ import MemberList from './MemberList';
 import ChannelList from './ChannelList';
 
 function Sidebar() {
-  const { user } = useStore();
+  const [{ user }] = useStore();
   const [sidebarMode, setSidebarMode] = useState(SidebarMode.memberList);
 
   const renderList = function () {

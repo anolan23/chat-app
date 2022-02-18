@@ -7,15 +7,16 @@ import Container from '../../components/Container';
 import Row from '../../components/Row';
 import Title from '../../components/Title';
 
-import { fetchUser } from '../../actions';
 import { useAuth } from '../../hooks/useAuth';
 import { User as UserType } from '../../types';
+import { fetchUser } from '../../api';
 
 function User() {
   const [userProfile, setUserProfile] = useState<UserType>({});
   const params = useParams();
   const navigate = useNavigate();
   const { authorized } = useAuth();
+
   useEffect(() => {
     start();
     async function start() {
