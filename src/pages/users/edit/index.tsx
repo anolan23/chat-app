@@ -9,9 +9,9 @@ import TextArea from '../../../components/TextArea';
 import Title from '../../../components/Title';
 import Avatar from '../../../components/Avatar';
 import { useAuth } from '../../../hooks/useAuth';
-import { updateUser } from '../../../api';
+import { updateUser } from '../../../actions';
 import useStore from '../../../context';
-import { updatePhoto } from '../../../api';
+import { updatePhoto } from '../../../actions';
 import { User } from '../../../types';
 
 interface Props {

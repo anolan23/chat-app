@@ -1,25 +1,32 @@
-import { createContext, useContext } from 'react';
-import { useUser } from '../hooks/useUser';
-import { User } from '../types';
+import React, { createContext, useContext, useReducer } from 'react';
+import { User, Channel, Action } from '../types';
+import reducers from '../reducers';
 
-interface Store {
+export interface State {
   user: User;
+  channel: Channel;
 }
 
-interface ProviderProps {
+interface Props {
   children: React.ReactNode;
 }
 
-const StoreContext = createContext({} as Store);
+type Store = [State, React.Dispatch<Action>];
 
-export function UserProvider({ children }: ProviderProps) {
-  const user = useUser();
-  const store = {
-    user,
-  };
+const initialState: State = {
+  user: {},
+  channel: {},
+};
+
+const StoreContext = createContext<Store>([initialState, () => null]);
+
+export function UserProvider({ children }: Props) {
+  const [state, dispatch] = useReducer(reducers, initialState);
 
   return (
-    <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
+    <StoreContext.Provider value={[state, dispatch]}>
+      {children}
+    </StoreContext.Provider>
   );
 }
 

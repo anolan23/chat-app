@@ -10,7 +10,9 @@ import useStore from './context';
 import Channels from './pages/channels';
 
 function App() {
-  const { user } = useStore();
+  const [state, dispatch] = useStore();
+  const { user } = state;
+  console.log(state);
   return (
     <BrowserRouter>
       <Routes>

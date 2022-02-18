@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserData } from '../types';
+import { User } from '../types';
 import UserItem from './UserItem';
 const members = [
   {
@@ -25,7 +25,7 @@ interface Props {
 
 function MemberList({ onBarClick }: Props) {
   const renderMembers = function () {
-    return members.map((member: UserData, index) => {
+    return members.map((member: User, index) => {
       return <UserItem key={index} user={member} />;
     });
   };

@@ -1,8 +1,8 @@
-import { UserData } from '../types';
+import { User } from '../types';
 import Avatar from './Avatar';
 
 interface Props {
-  user: UserData;
+  user: User;
 }
 
 function UserItem({ user }: Props) {

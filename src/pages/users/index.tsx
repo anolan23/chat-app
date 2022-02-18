@@ -7,12 +7,12 @@ import Container from '../../components/Container';
 import Row from '../../components/Row';
 import Title from '../../components/Title';
 
-import { getUser } from '../../api';
+import { fetchUser } from '../../actions';
 import { useAuth } from '../../hooks/useAuth';
-import { UserData } from '../../types';
+import { User as UserType } from '../../types';
 
 function User() {
-  const [userProfile, setUserProfile] = useState<UserData>({});
+  const [userProfile, setUserProfile] = useState<UserType>({});
   const params = useParams();
   const navigate = useNavigate();
   const { authorized } = useAuth();
@@ -20,7 +20,7 @@ function User() {
     start();
     async function start() {
       if (!params.id) return;
-      const user = await getUser(+params.id);
+      const user = await fetchUser(+params.id);
       setUserProfile(user);
     }
   }, [params.id]);
