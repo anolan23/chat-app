@@ -10,6 +10,8 @@ export default function reducer(state: State, action: Action): State {
       return { ...state, user: action.payload };
     case ActionType.logout:
       return { ...state, user: { isSignedIn: false } };
+    case ActionType.setUser:
+      return { ...state, user: action.payload };
     case ActionType.updateUser:
       return { ...state, user: action.payload };
     case ActionType.updatePhoto:

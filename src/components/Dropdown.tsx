@@ -29,7 +29,7 @@ function Dropdown({ show, close, user, direction = 'down' }: Props) {
         className="dropdown__item"
         onClick={async () => {
           close();
-          navigate(`/channels`);
+          navigate(`/channels/1`);
         }}
       >
         <span className="material-icons">group</span>

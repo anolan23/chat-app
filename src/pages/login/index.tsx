@@ -9,13 +9,11 @@ import { ReactComponent as Google } from '../../images/Google.svg';
 import { ReactComponent as Facebook } from '../../images/Facebook.svg';
 import { Link, useNavigate } from 'react-router-dom';
 
-import useStore from '../../context';
-import { Credentials } from '../../types/user';
+import { Credentials, User } from '../../types/user';
 import { useActions } from '../../hooks/useActions';
 
 function Login() {
   const navigate = useNavigate();
-  const [{ user }] = useStore();
   const { login } = useActions();
   const formik = useFormik({
     initialValues: {
@@ -24,10 +22,10 @@ function Login() {
     },
     async onSubmit(credentials: Credentials) {
       try {
-        await login(credentials);
-        console.log(user);
-        if (!user.id) return;
-        navigate(`/users/${user.id}`);
+        await login(credentials, (user: User) => {
+          if (!user.id) return;
+          navigate(`/users/${user.id}`);
+        });
       } catch (error) {
         console.error(error);
       }

@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
 
 import Signup from './pages/signup';
 import Home from './pages/index';
@@ -8,11 +9,17 @@ import EditUser from './pages/users/edit';
 import PageLayout from './components/PageLayout';
 import useStore from './context';
 import Channels from './pages/channels';
+import { useActions } from './hooks/useActions';
 
 function App() {
-  const [state] = useStore();
-  const { user } = state;
-  console.log(state);
+  const [{ user }] = useStore();
+  const { autoLogin } = useActions();
+
+  useEffect(() => {
+    autoLogin();
+  }, []);
+
+  console.log(user);
   return (
     <BrowserRouter>
       <Routes>

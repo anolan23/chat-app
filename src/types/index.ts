@@ -7,6 +7,7 @@ export enum SidebarMode {
 export enum ActionType {
   autoLogin,
   fetchUser,
+  setUser,
   updateUser,
   updatePhoto,
   signup,
