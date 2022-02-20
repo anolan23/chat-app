@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useContext, useEffect, useReducer } from 'react';
 import { User, Channel, Action } from '../types';
 import reducers from '../reducers';
 
@@ -22,6 +22,7 @@ const StoreContext = createContext<Store>([initialState, () => null]);
 
 export function UserProvider({ children }: Props) {
   const [state, dispatch] = useReducer(reducers, initialState);
+  console.log(state);
 
   return (
     <StoreContext.Provider value={[state, dispatch]}>

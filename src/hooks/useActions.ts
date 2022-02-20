@@ -2,7 +2,7 @@ import useStore from '../context';
 import axios from 'axios';
 
 import { Credentials } from '../types/user';
-import { ActionType, User } from '../types';
+import { ActionType, Channel, User } from '../types';
 
 export function useActions() {
   const [, dispatch] = useStore();
@@ -75,6 +75,10 @@ export function useActions() {
     }
   }
 
+  function setChannel(channel: Channel): void {
+    dispatch({ type: ActionType.setChannel, payload: channel });
+  }
+
   return {
     autoLogin,
     updateUser,
@@ -82,5 +86,6 @@ export function useActions() {
     signup,
     login,
     logout,
+    setChannel,
   };
 }

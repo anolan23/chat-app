@@ -13,6 +13,7 @@ export enum ActionType {
   signup,
   login,
   logout,
+  setChannel
 }
 export interface Action {
   type: ActionType;

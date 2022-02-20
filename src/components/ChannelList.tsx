@@ -1,6 +1,9 @@
 import React from 'react';
+import { useActions } from '../hooks/useActions';
+import { Channel } from '../types';
 import ChannelItem from './ChannelItem';
 import Input from './Input';
+
 const channels = [
   {
     id: 1,
@@ -21,9 +24,16 @@ const channels = [
 ];
 
 function ChannelList() {
+  const { setChannel } = useActions();
   const renderChannels = function () {
-    return channels.map((channel, index) => {
-      return <ChannelItem key={index} channel={channel} />;
+    return channels.map((channel: Channel, index) => {
+      return (
+        <ChannelItem
+          key={index}
+          channel={channel}
+          onClick={() => setChannel(channel)}
+        />
+      );
     });
   };
   return (

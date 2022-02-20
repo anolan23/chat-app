@@ -19,7 +19,6 @@ function App() {
     autoLogin();
   }, []);
 
-  console.log(user);
   return (
     <BrowserRouter>
       <Routes>
