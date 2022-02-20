@@ -1,30 +1,13 @@
 import React from 'react';
+import useStore from '../context';
 import { useActions } from '../hooks/useActions';
 import { Channel } from '../types';
 import ChannelItem from './ChannelItem';
 import Input from './Input';
 
-const channels = [
-  {
-    id: 1,
-    name: 'front-end developers',
-  },
-  {
-    id: 2,
-    name: 'welcome',
-  },
-  {
-    id: 3,
-    name: 'back-end developers',
-  },
-  {
-    id: 4,
-    name: 'front-end developers',
-  },
-];
-
 function ChannelList() {
-  const { setChannel } = useActions();
+  const [{ channels }] = useStore();
+  const { setChannel, setShowAddChannelPopup } = useActions();
   const renderChannels = function () {
     return channels.map((channel: Channel, index) => {
       return (
@@ -42,7 +25,12 @@ function ChannelList() {
         <div className="channel-list-sidebar__bar">
           <span className="channel-list-sidebar__bar__title">Channels</span>
           <button className="channel-list-sidebar__bar__btn">
-            <span className="material-icons">add</span>
+            <span
+              onClick={() => setShowAddChannelPopup(true)}
+              className="material-icons"
+            >
+              add
+            </span>
           </button>
         </div>
       </div>

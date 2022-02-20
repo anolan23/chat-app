@@ -1,0 +1,73 @@
+.popup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3000;
+  background-color: rgba(18, 15, 19, 0.5);
+  transition: all 0.1s;
+
+  &__window {
+    display: flex;
+    flex-direction: column;
+    background-color: $color-black200;
+    min-width: 55rem;
+    max-width: 60rem;
+    max-height: 90vh;
+    padding: 2.4rem 3.2rem;
+    border-radius: 2.4rem;
+    overflow: hidden;
+    animation: moveInBottom 0.4s ease;
+    &__close {
+      align-self: flex-end;
+      cursor: pointer;
+      color: #828282;
+    }
+  }
+}
+
+.cancel-list-popup {
+  display: flex;
+  flex-direction: column;
+  &__message {
+    font-size: 2.4rem;
+    color: #34333a;
+    width: 75%;
+  }
+
+  &__actions {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 1.6rem;
+    margin-top: 3.2rem;
+    align-self: flex-end;
+  }
+}
+
+.new-channel-popup {
+  display: grid;
+  gap: 2.4rem;
+  &__title {
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  & input,
+  & textarea {
+    font-size: 1.8rem;
+    color: $color-text-black200;
+    &::placeholder {
+      color: $color-text-black100;
+    }
+  }
+  &__input {
+    background-color: $color-black400;
+    border: none;
+  }
+  &__btn {
+  }
+}

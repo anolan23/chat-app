@@ -2,6 +2,7 @@ import { State } from '../context';
 import { Action } from '../types';
 import userReducer from './userReducer';
 import channelReducer from './channelReducer';
+import modalReducer from './modalReducer';
 
 function combineReducers(
   ...reducers: any
@@ -13,4 +14,4 @@ function combineReducers(
     );
 }
 
-export default combineReducers(userReducer, channelReducer);
+export default combineReducers(userReducer, channelReducer, modalReducer);

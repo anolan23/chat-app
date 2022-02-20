@@ -1,7 +1,14 @@
 import Message from '../../components/Message';
 import Compose from '../../components/Compose';
 import Sidebar from '../../components/Sidebar';
+import NewChannelPopup from '../../components/NewChannelPopup';
+import { useActions } from '../../hooks/useActions';
+import useStore from '../../context';
+
 function Channels() {
+  const [{ showAddChannelPopup, user }] = useStore();
+  const { setShowAddChannelPopup } = useActions();
+
   return (
     <div className="channels">
       <Sidebar />
@@ -51,6 +58,11 @@ function Channels() {
           <Compose />
         </div>
       </main>
+      <NewChannelPopup
+        show={showAddChannelPopup}
+        close={() => setShowAddChannelPopup(false)}
+        user={user}
+      />
     </div>
   );
 }

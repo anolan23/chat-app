@@ -79,6 +79,28 @@ export function useActions() {
     dispatch({ type: ActionType.setChannel, payload: channel });
   }
 
+  function setShowAddChannelPopup(show: boolean): void {
+    dispatch({ type: ActionType.setShowAddChannelPopup, payload: show });
+  }
+
+  async function createChannel(channel: Channel) {
+    try {
+      const response = await axios.post('/api/channels', channel);
+      dispatch({ type: ActionType.createChannel, payload: response.data });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async function fetchAllChannels() {
+    try {
+      const response = await axios.get('/api/channels');
+      dispatch({ type: ActionType.fetchAllChannels, payload: response.data });
+    } catch (error) {
+      throw error;
+    }
+  }
+
   return {
     autoLogin,
     updateUser,
@@ -87,5 +109,8 @@ export function useActions() {
     login,
     logout,
     setChannel,
+    setShowAddChannelPopup,
+    createChannel,
+    fetchAllChannels,
   };
 }

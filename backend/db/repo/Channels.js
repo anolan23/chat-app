@@ -1,11 +1,11 @@
 const db = require('..');
-class Users {
-  static async findOne(id) {
+class Channels {
+  static async findOneById(id) {
     try {
       const { rows } = await db.query(
         `
         SELECT *
-        FROM users
+        FROM channels
         WHERE id = $1
         `,
         [id]
@@ -16,53 +16,31 @@ class Users {
     }
   }
 
-  static async findOrCreate({ photo, name, email, google_id }) {
+  static async find() {
     try {
       const { rows } = await db.query(
         `
-        WITH cte AS (
-          INSERT INTO users (email, photo, name, google_id)
-          VALUES ($1, $2, $3, $4)
-          ON CONFLICT (google_id, email) DO NOTHING
-          RETURNING *
-       )
-       SELECT *
-       FROM cte
-       WHERE EXISTS (SELECT 1 FROM cte)
-       UNION ALL
-       SELECT *
-       FROM users 
-       WHERE google_id = $4
-         AND NOT EXISTS (SELECT 1 FROM cte);
+        SELECT *
+        FROM channels
+        ORDER BY name
         `,
-        [email, photo, name, google_id]
+        []
       );
-      return rows[0];
+      return rows;
     } catch (error) {
       throw error;
     }
   }
 
-  static async FBfindOrCreate({ photo, name, email, facebook_id }) {
+  static async create(channel) {
     try {
       const { rows } = await db.query(
         `
-        WITH cte AS (
-          INSERT INTO users (email, photo, name, facebook_id)
-          VALUES ($1, $2, $3, $4)
-          ON CONFLICT (facebook_id, email) DO NOTHING
-          RETURNING *
-       )
-       SELECT *
-       FROM cte
-       WHERE EXISTS (SELECT 1 FROM cte)
-       UNION ALL
-       SELECT *
-       FROM users 
-       WHERE facebook_id = $4
-         AND NOT EXISTS (SELECT 1 FROM cte);
+        INSERT INTO channels (user_id, name, description)
+        VALUES ($1, $2, $3)
+        RETURNING *
         `,
-        [email, photo, name, facebook_id]
+        [channel.user_id, channel.name, channel.description]
       );
       return rows[0];
     } catch (error) {
@@ -71,7 +49,7 @@ class Users {
   }
 
   static async update(id, cols) {
-    let query = ['UPDATE users'];
+    let query = ['UPDATE channels'];
     query.push('SET');
 
     // Create another array storing each set command
@@ -101,4 +79,4 @@ class Users {
   }
 }
 
-module.exports = Users;
+module.exports = Channels;

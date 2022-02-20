@@ -39,7 +39,8 @@ h2 {
   color: black;
 }
 
-input {
+input,
+textarea {
   font-family: inherit;
   &::placeholder {
     color: var(--color-gray);

@@ -1,10 +1,12 @@
-import React, { createContext, useContext, useEffect, useReducer } from 'react';
+import React, { createContext, useContext, useReducer } from 'react';
 import { User, Channel, Action } from '../types';
 import reducers from '../reducers';
 
 export interface State {
   user: User;
   channel: Channel;
+  channels: Channel[];
+  showAddChannelPopup: boolean;
 }
 
 interface Props {
@@ -16,6 +18,8 @@ type Store = [State, React.Dispatch<Action>];
 const initialState: State = {
   user: {},
   channel: {},
+  channels: [],
+  showAddChannelPopup: false,
 };
 
 const StoreContext = createContext<Store>([initialState, () => null]);
