@@ -110,6 +110,22 @@ export function useActions() {
     }
   }
 
+  async function fetchMessagesByChannelId(channelId: number) {
+    try {
+      const response = await axios.get<Message[]>('/api/messages', {
+        params: {
+          channelId,
+        },
+      });
+      dispatch({
+        type: ActionType.fetchMessagesByChannelId,
+        payload: response.data,
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
   return {
     autoLogin,
     updateUser,
@@ -122,5 +138,6 @@ export function useActions() {
     createChannel,
     fetchAllChannels,
     createMessage,
+    fetchMessagesByChannelId,
   };
 }

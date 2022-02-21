@@ -16,7 +16,7 @@ router.get('/api/channels', async (req, res) => {
 router.get('/api/channels/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const channel = Channels.findOneById(id);
+    const channel = await Channels.findOneById(id);
     res.send(channel);
   } catch (error) {
     res.status(error.status || 500).send({ error: error.message });

@@ -8,7 +8,9 @@ function Compose() {
   const [body, setBody] = useState<string>('');
   const { createMessage } = useActions();
 
-  const onSubmit = async function (event: React.ChangeEvent<HTMLFormElement>) {
+  const handleSubmit = async function (
+    event: React.ChangeEvent<HTMLFormElement>
+  ) {
     try {
       event.preventDefault();
       if (!user.id || !channel.id) return;
@@ -29,7 +31,7 @@ function Compose() {
   };
 
   return (
-    <form onSubmit={onSubmit} className="compose">
+    <form onSubmit={handleSubmit} className="compose">
       <input
         className="compose__input"
         placeholder="Type a message here"

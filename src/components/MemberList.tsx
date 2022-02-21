@@ -1,4 +1,5 @@
 import React from 'react';
+import useStore from '../context';
 import { User } from '../types';
 import UserItem from './UserItem';
 const members = [
@@ -24,6 +25,7 @@ interface Props {
 }
 
 function MemberList({ onBarClick }: Props) {
+  const [{ channel }] = useStore();
   const renderMembers = function () {
     return members.map((member: User, index) => {
       return <UserItem key={index} user={member} />;
@@ -44,11 +46,10 @@ function MemberList({ onBarClick }: Props) {
         <div className="member-list-sidebar__content">
           <div className="member-list-sidebar__description">
             <span className="member-list-sidebar__description__title">
-              Front-end developers
+              {channel.name}
             </span>
             <p className="member-list-sidebar__description__text">
-              Pellentesque sagittis elit enim, sit amet ultrices tellus accumsan
-              quis. In gravida mollis purus, at interdum arcu tempor non
+              {channel.description}
             </p>
           </div>
           <div className="member-list-sidebar__members">

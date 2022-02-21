@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   background-color: #120f13;
+  overflow-y: hidden;
   &__bar {
     display: flex;
     align-items: center;
@@ -14,6 +15,7 @@
   &__content {
     flex: 1;
     padding: 2.4rem 3.2rem;
+    overflow-y: scroll;
   }
   &__footer {
     display: flex;
@@ -109,6 +111,10 @@
     }
   }
 
+  &__search-box {
+    padding: 2rem 3.2rem;
+  }
+
   &__search {
     background-color: #3c393f;
     border: none;
@@ -126,6 +132,5 @@
   }
 
   &__channels {
-    margin-top: 1.6rem;
   }
 }

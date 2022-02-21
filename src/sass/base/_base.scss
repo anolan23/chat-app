@@ -26,6 +26,10 @@ body {
   font-size: 1.6rem;
   font-weight: 400;
   color: #333333;
+  scrollbar-color: transparent transparent;
+  *::-webkit-scrollbar {
+    background-color: transparent; /* color of the tracking area */
+  }
 }
 
 h1 {

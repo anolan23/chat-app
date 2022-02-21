@@ -10,6 +10,7 @@
   &__main {
     display: flex;
     flex-direction: column;
+    overflow-y: hidden;
     background-color: $color-chat;
   }
 
@@ -30,6 +31,12 @@
 
   &__chat {
     flex: 1;
+    overflow-y: scroll;
+    scrollbar-color: $color-black400 transparent;
+    &::-webkit-scrollbar-thumb {
+      background-color: $color-black400; /* color of the scroll thumb */
+      border-radius: 0; /* roundness of the scroll thumb */
+    }
   }
 
   &__compose {
