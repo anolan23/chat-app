@@ -1,25 +1,26 @@
 import { Link } from 'react-router-dom';
+import { Message } from '../types';
 import Avatar from './Avatar';
+import { dateString } from '../lib/helpers';
 
 interface Props {
-  message: {
-    src: string;
-    name: string;
-    date: string;
-    body: string;
-  };
+  message: Message;
 }
 
-function Message({ message }: Props) {
+function MessageComp({ message }: Props) {
   return (
     <article className="message">
-      <Avatar src={message.src} className="message__avatar" />
+      <Avatar src={message.photo} className="message__avatar" />
       <div className="message__content">
         <div className="message__content__info">
           <Link to="/" className="message__name">
             {message.name}
           </Link>
-          <span className="message__date">{message.date}</span>
+          {message.created_at ? (
+            <span className="message__date">
+              {dateString(message.created_at)}
+            </span>
+          ) : null}
         </div>
         <p className="message__content__text">{message.body}</p>
       </div>
@@ -27,4 +28,4 @@ function Message({ message }: Props) {
   );
 }
 
-export default Message;
+export default MessageComp;

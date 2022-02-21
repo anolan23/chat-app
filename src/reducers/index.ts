@@ -3,6 +3,7 @@ import { Action } from '../types';
 import userReducer from './userReducer';
 import channelReducer from './channelReducer';
 import modalReducer from './modalReducer';
+import messagesReducer from './messagesReducer';
 
 function combineReducers(
   ...reducers: any
@@ -14,4 +15,9 @@ function combineReducers(
     );
 }
 
-export default combineReducers(userReducer, channelReducer, modalReducer);
+export default combineReducers(
+  userReducer,
+  channelReducer,
+  modalReducer,
+  messagesReducer
+);

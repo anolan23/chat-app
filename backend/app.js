@@ -5,6 +5,7 @@ const path = require('path');
 const authRouter = require('./routes/auth.js');
 const usersRouter = require('./routes/users.js');
 const channelsRouter = require('./routes/channels.js');
+const messagesRouter = require('./routes/messages.js');
 const photosRouter = require('./routes/photos.js');
 const { googleStrategy, facebookStrategy } = require('./config/strategies');
 
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use(authRouter);
 app.use(usersRouter);
 app.use(channelsRouter);
+app.use(messagesRouter);
 app.use(photosRouter);
 
 app.use(express.static(path.join(__dirname, '..', 'build')));

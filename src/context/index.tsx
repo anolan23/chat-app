@@ -1,11 +1,12 @@
 import React, { createContext, useContext, useReducer } from 'react';
-import { User, Channel, Action } from '../types';
+import { User, Channel, Action, Message } from '../types';
 import reducers from '../reducers';
 
 export interface State {
   user: User;
   channel: Channel;
   channels: Channel[];
+  messages: Message[];
   showAddChannelPopup: boolean;
 }
 
@@ -19,6 +20,7 @@ const initialState: State = {
   user: {},
   channel: {},
   channels: [],
+  messages: [],
   showAddChannelPopup: false,
 };
 

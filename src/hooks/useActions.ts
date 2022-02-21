@@ -2,7 +2,7 @@ import useStore from '../context';
 import axios from 'axios';
 
 import { Credentials } from '../types/user';
-import { ActionType, Channel, User } from '../types';
+import { ActionType, Channel, Message, User } from '../types';
 
 export function useActions() {
   const [, dispatch] = useStore();
@@ -101,6 +101,15 @@ export function useActions() {
     }
   }
 
+  async function createMessage(message: Message) {
+    try {
+      const response = await axios.post<Message>('/api/messages', message);
+      dispatch({ type: ActionType.createMessage, payload: response.data });
+    } catch (error) {
+      throw error;
+    }
+  }
+
   return {
     autoLogin,
     updateUser,
@@ -112,5 +121,6 @@ export function useActions() {
     setShowAddChannelPopup,
     createChannel,
     fetchAllChannels,
+    createMessage,
   };
 }

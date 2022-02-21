@@ -1,5 +1,6 @@
 export * from './user';
 export * from './channel';
+export * from './message';
 export enum SidebarMode {
   memberList,
   channelList,
@@ -17,6 +18,7 @@ export enum ActionType {
   setShowAddChannelPopup,
   createChannel,
   fetchAllChannels,
+  createMessage,
 }
 export interface Action {
   type: ActionType;
