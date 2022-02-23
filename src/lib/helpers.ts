@@ -19,7 +19,6 @@ export function dateString(created_at: string): string {
 }
 
 export function scrollToBottom(ref: React.RefObject<HTMLDivElement>): void {
-  console.log('scrollToBottom');
   if (!ref.current) return;
   ref.current.scrollTop = ref.current.scrollHeight;
   // ref.current.scrollIntoView(false);

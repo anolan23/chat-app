@@ -24,7 +24,6 @@ module.exports = (passport) => {
       try {
         const id = payload.sub;
         const user = await Users.findOne(id);
-        console.log(user);
         if (!user) return done(null, false);
         delete user['password'];
         return done(null, user);

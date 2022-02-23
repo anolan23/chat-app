@@ -13,8 +13,15 @@ import { scrollToBottom } from '../../lib/helpers';
 function Channels() {
   const { id } = useParams();
   const chatListRef = useRef<HTMLDivElement>(null);
-  const [{ showAddChannelPopup, user, messages, channel }] = useStore();
-  const { setShowAddChannelPopup, fetchMessagesByChannelId } = useActions();
+  const [{ showAddChannelPopup, user, messages, channel, socket }] = useStore();
+  const { setShowAddChannelPopup, fetchMessagesByChannelId, addMessage } =
+    useActions();
+
+  useEffect(() => {
+    socket.on('message', (message) => {
+      addMessage(message);
+    });
+  }, []);
 
   useEffect(() => {
     if (!id) return;
@@ -22,15 +29,15 @@ function Channels() {
   }, [id]);
 
   useEffect(() => {
+    if (!messages) return;
     scrollToBottom(chatListRef);
-  }, [messages, chatListRef]);
+  }, [messages]);
 
   const renderMessages = function () {
     return messages.map((message: Message, index) => {
       return <MessageComp key={index} message={message} />;
     });
   };
-
 
   return (
     <div className="channels">

@@ -5,7 +5,7 @@ import { Credentials } from '../types/user';
 import { ActionType, Channel, Message, User } from '../types';
 
 export function useActions() {
-  const [, dispatch] = useStore();
+  const [{ socket }, dispatch] = useStore();
 
   async function login(
     credentials: Credentials,
@@ -110,6 +110,17 @@ export function useActions() {
     }
   }
 
+  function sendMessage(message: Message): void {
+    socket.emit('sendMessage', message, (error) => {
+      if (error) console.error(error);
+      else console.log('Message sent');
+    });
+  }
+
+  function addMessage(message: Message): void {
+    dispatch({ type: ActionType.addMessage, payload: message });
+  }
+
   async function fetchMessagesByChannelId(channelId: number) {
     try {
       const response = await axios.get<Message[]>('/api/messages', {
@@ -139,5 +150,7 @@ export function useActions() {
     fetchAllChannels,
     createMessage,
     fetchMessagesByChannelId,
+    sendMessage,
+    addMessage,
   };
 }

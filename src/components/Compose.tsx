@@ -6,7 +6,7 @@ import { useActions } from '../hooks/useActions';
 function Compose() {
   const [{ user, channel }] = useStore();
   const [body, setBody] = useState<string>('');
-  const { createMessage } = useActions();
+  const { createMessage, sendMessage } = useActions();
 
   const handleSubmit = async function (
     event: React.ChangeEvent<HTMLFormElement>
@@ -20,7 +20,7 @@ function Compose() {
         body,
       };
       setBody('');
-      await createMessage(message);
+      sendMessage(message);
     } catch (error) {
       console.error(error);
     }

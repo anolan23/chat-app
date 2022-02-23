@@ -6,6 +6,8 @@ export default function reducer(state: State, action: Action): State {
       return { ...state, messages: [...state.messages, action.payload] };
     case ActionType.fetchMessagesByChannelId:
       return { ...state, messages: action.payload };
+    case ActionType.addMessage:
+      return { ...state, messages: [...state.messages, action.payload] };
     default:
       return state;
   }
