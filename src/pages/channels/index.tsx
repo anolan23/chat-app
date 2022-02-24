@@ -14,19 +14,40 @@ function Channels() {
   const { id } = useParams();
   const chatListRef = useRef<HTMLDivElement>(null);
   const [{ showAddChannelPopup, user, messages, channel, socket }] = useStore();
-  const { setShowAddChannelPopup, fetchMessagesByChannelId, addMessage } =
-    useActions();
+  const {
+    setShowAddChannelPopup,
+    fetchMessagesByChannelId,
+    addMessage,
+    join,
+    setMembers,
+    fetchChannel,
+  } = useActions();
 
   useEffect(() => {
     socket.on('message', (message) => {
       addMessage(message);
     });
+
+    socket.on('action', (message) => {
+      console.log(message);
+    });
+
+    socket.on('members', (members) => {
+      console.log(members);
+      setMembers(members);
+    });
   }, []);
 
   useEffect(() => {
     if (!id) return;
+    fetchChannel(+id);
     fetchMessagesByChannelId(+id);
   }, [id]);
+
+  useEffect(() => {
+    if (!id || !user) return;
+    join(user, +id);
+  }, [user, id]);
 
   useEffect(() => {
     if (!messages) return;

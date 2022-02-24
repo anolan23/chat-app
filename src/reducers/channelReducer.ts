@@ -12,6 +12,8 @@ export default function reducer(state: State, action: Action): State {
       };
     case ActionType.fetchAllChannels:
       return { ...state, channels: action.payload };
+    case ActionType.fetchChannel:
+      return { ...state, channel: action.payload };
     default:
       return state;
   }

@@ -2,30 +2,13 @@ import React from 'react';
 import useStore from '../context';
 import { User } from '../types';
 import UserItem from './UserItem';
-const members = [
-  {
-    name: 'Aaron Nolan',
-    photo:
-      'https://www.nj.com/resizer/zovGSasCaR41h_yUGYHXbVTQW2A=/1280x0/smart/cloudfront-us-east-1.images.arcpublishing.com/advancelocal/SJGKVE5UNVESVCW7BBOHKQCZVE.jpg',
-  },
-  {
-    name: 'Sean Nolan',
-    photo:
-      'https://www.nj.com/resizer/zovGSasCaR41h_yUGYHXbVTQW2A=/1280x0/smart/cloudfront-us-east-1.images.arcpublishing.com/advancelocal/SJGKVE5UNVESVCW7BBOHKQCZVE.jpg',
-  },
-  {
-    name: 'Caroline Nolan',
-    photo:
-      'https://www.nj.com/resizer/zovGSasCaR41h_yUGYHXbVTQW2A=/1280x0/smart/cloudfront-us-east-1.images.arcpublishing.com/advancelocal/SJGKVE5UNVESVCW7BBOHKQCZVE.jpg',
-  },
-];
 
 interface Props {
   onBarClick: () => void;
 }
 
 function MemberList({ onBarClick }: Props) {
-  const [{ channel }] = useStore();
+  const [{ channel, members }] = useStore();
   const renderMembers = function () {
     return members.map((member: User, index) => {
       return <UserItem key={index} user={member} />;

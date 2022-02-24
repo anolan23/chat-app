@@ -11,6 +11,13 @@ const photosRouter = require('./routes/photos.js');
 const { googleStrategy, facebookStrategy } = require('./config/strategies');
 const { Server } = require('socket.io');
 const Messages = require('./db/repo/Messages.js');
+const {
+  addMember,
+  removeMember,
+  getMember,
+  getMembersByChannelId,
+  leaveChannel,
+} = require('./utils/users');
 
 const app = express();
 const server = http.createServer(app);
@@ -41,12 +48,35 @@ app.get('*', (req, res) => {
 
 io.on('connection', (socket) => {
   console.log('New connection!');
-  socket.broadcast.emit('action', 'User has joined channel');
+
+  socket.on('join', (user, channelId, callback) => {
+    if (!user.name) return;
+    leaveChannel(io, socket);
+    const result = addMember({ ...user, socketId: socket.id }, channelId);
+    if (result.error) {
+      callback(result.error);
+      return;
+    }
+
+    socket.join(result.channelId);
+
+    socket.broadcast
+      .to(result.channelId)
+      .emit('action', `${result.name} has joined channel ${result.channelId}`);
+    io.to(result.channelId).emit(
+      'members',
+      getMembersByChannelId(result.channelId)
+    );
+    callback();
+  });
 
   socket.on('sendMessage', async (message, callback) => {
     try {
+      const member = getMember(socket.id);
+      if (!member) return;
       const createdMsg = await Messages.create(message);
-      io.emit('message', createdMsg);
+
+      io.to(member.channelId).emit('message', createdMsg);
       callback();
     } catch (error) {
       callback(error);
@@ -54,7 +84,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('disconnect', () => {
-    io.emit('action', 'User has left channel');
+    leaveChannel(io, socket);
   });
 });
 

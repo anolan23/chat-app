@@ -6,6 +6,8 @@ import reducers from '../reducers';
 
 interface ServerToClientEvents {
   message: (message: Message, callback: (message: Message) => void) => void;
+  action: (message: string) => void;
+  members: (members: User[]) => void;
   noArg: () => void;
   basicEmit: (a: number, b: string, c: Buffer) => void;
   withAck: (d: string, callback: (e: number) => void) => void;
@@ -13,12 +15,17 @@ interface ServerToClientEvents {
 
 interface ClientToServerEvents {
   sendMessage: (message: Message, callback: (error: string) => void) => void;
-  hello: () => void;
+  join: (
+    user: User,
+    channelId: number,
+    callback: (error: string) => void
+  ) => void;
 }
 
 export interface State {
   user: User;
   channel: Channel;
+  members: User[];
   channels: Channel[];
   messages: Message[];
   showAddChannelPopup: boolean;
@@ -34,6 +41,7 @@ type Store = [State, React.Dispatch<Action>];
 const initialState: State = {
   user: {},
   channel: {},
+  members: [],
   channels: [],
   messages: [],
   showAddChannelPopup: false,
@@ -44,7 +52,7 @@ const StoreContext = createContext<Store>([initialState, () => null]);
 
 export function UserProvider({ children }: Props) {
   const [state, dispatch] = useReducer(reducers, initialState);
-  // console.log(state);
+  console.log(state);
 
   return (
     <StoreContext.Provider value={[state, dispatch]}>

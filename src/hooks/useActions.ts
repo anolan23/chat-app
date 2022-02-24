@@ -101,6 +101,15 @@ export function useActions() {
     }
   }
 
+  async function fetchChannel(id: number) {
+    try {
+      const response = await axios.get(`/api/channels/${id}`);
+      dispatch({ type: ActionType.fetchChannel, payload: response.data });
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async function createMessage(message: Message) {
     try {
       const response = await axios.post<Message>('/api/messages', message);
@@ -137,6 +146,17 @@ export function useActions() {
     }
   }
 
+  function join(user: User, channelId: number): void {
+    socket.emit('join', user, channelId, (error) => {
+      if (error) console.error(error);
+      console.log(`Successfully joined channel ${channelId}`);
+    });
+  }
+
+  function setMembers(members: User[]): void {
+    dispatch({ type: ActionType.setMembers, payload: members });
+  }
+
   return {
     autoLogin,
     updateUser,
@@ -152,5 +172,8 @@ export function useActions() {
     fetchMessagesByChannelId,
     sendMessage,
     addMessage,
+    join,
+    setMembers,
+    fetchChannel,
   };
 }
