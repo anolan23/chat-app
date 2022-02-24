@@ -15,6 +15,30 @@ function MemberList({ onBarClick }: Props) {
     });
   };
 
+  const renderContent = function () {
+    if (!Object.keys(channel).length) return null;
+    return (
+      <div className="member-list-sidebar__content">
+        <div className="member-list-sidebar__description">
+          <span className="member-list-sidebar__description__title">
+            {channel.name}
+          </span>
+          <p className="member-list-sidebar__description__text">
+            {channel.description}
+          </p>
+        </div>
+        <div className="member-list-sidebar__members">
+          <span className="member-list-sidebar__members__title">
+            Members ({members.length})
+          </span>
+          <span className="member-list-sidebar__members__list">
+            {renderMembers()}
+          </span>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <React.Fragment>
       <div className="sidebar__bar">
@@ -25,26 +49,7 @@ function MemberList({ onBarClick }: Props) {
           <span className="member-list-sidebar__bar__title">All channels</span>
         </div>
       </div>
-      <div className="sidebar__content">
-        <div className="member-list-sidebar__content">
-          <div className="member-list-sidebar__description">
-            <span className="member-list-sidebar__description__title">
-              {channel.name}
-            </span>
-            <p className="member-list-sidebar__description__text">
-              {channel.description}
-            </p>
-          </div>
-          <div className="member-list-sidebar__members">
-            <span className="member-list-sidebar__members__title">
-              Members ({members.length})
-            </span>
-            <span className="member-list-sidebar__members__list">
-              {renderMembers()}
-            </span>
-          </div>
-        </div>
-      </div>
+      <div className="sidebar__content">{renderContent()}</div>
     </React.Fragment>
   );
 }

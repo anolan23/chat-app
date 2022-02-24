@@ -17,6 +17,7 @@ function ChannelList({ setMode }: Props) {
   const { setChannel, setShowAddChannelPopup } = useActions();
 
   const onChannelClick = function (channel: Channel) {
+    setChannel({});
     setMode(SidebarMode.memberList);
     navigate(`/channels/${channel.id}`);
   };

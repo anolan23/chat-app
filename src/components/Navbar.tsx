@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { ReactComponent as Logo } from '../images/devchallenges.svg';
+import { ReactComponent as Logo } from '../images/devchallenges-light.svg';
 import UserToggle from './UserToggle';
 import { User } from '../types';
 

@@ -25,8 +25,10 @@ body {
   font-family: Noto Sans Display;
   font-size: 1.6rem;
   font-weight: 400;
-  color: #333333;
+  color: $color-text;
   scrollbar-color: transparent transparent;
+  background-color: $color-black300;
+
   *::-webkit-scrollbar {
     background-color: transparent; /* color of the tracking area */
   }
@@ -35,26 +37,29 @@ body {
 h1 {
   font-size: 3.6rem;
   font-weight: 400;
-  color: black;
+  color: $color-text;
 }
 h2 {
   font-size: 1.8rem;
   font-weight: 300;
-  color: black;
+  color: $color-text-black200;
 }
 
 input,
 textarea {
   font-family: inherit;
+  background-color: $color-black300;
+  color: $color-text !important;
   &::placeholder {
-    color: var(--color-gray);
+    color: $color-text-black200;
   }
   &:-webkit-autofill {
     &,
     &:hover,
     &:focus,
     &:active {
-      -webkit-box-shadow: 0 0 0 1000px #fafafb inset !important;
+      -webkit-box-shadow: 0 0 0 1000px $color-black300 inset !important;
+      transition: background-color 600000s 0s, color 600000s 0s;
     }
   }
 }
@@ -73,7 +78,6 @@ textarea {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #fafafb;
 }
 
 .auth {
@@ -91,7 +95,7 @@ textarea {
   width: 47.4rem;
   padding: 4.3rem 5.9rem;
   margin: auto;
-  border: 1px solid #bdbdbd;
+  border: $border;
   border-radius: 24px;
   @media only screen and (max-width: 550px) {
     border: none;
@@ -107,7 +111,8 @@ textarea {
     margin-bottom: 1.6rem;
   }
   &__text {
-    color: var(--color-gray);
+    color: $color-text-black200;
+
     margin-bottom: 3.2rem;
   }
   &__form {
@@ -120,14 +125,14 @@ textarea {
           &:hover,
           &:focus,
           &:active {
-            -webkit-box-shadow: 0 0 0 1000px white inset !important;
+            -webkit-box-shadow: 0 0 0 1000px $color-black300 inset !important;
           }
         }
       }
     }
   }
   &__message {
-    color: var(--color-gray);
+    color: $color-text-black200;
     font-size: 1.4rem;
     text-align: center;
     margin-top: 3.2rem;
@@ -144,19 +149,19 @@ textarea {
   &__prompt {
     text-align: center;
     font-size: 1.4rem;
-    color: var(--color-gray);
+    color: $color-text-black200;
   }
 }
 
 .input-box {
   display: flex;
   align-items: center;
-  border: 1px solid #bdbdbd;
+  border: 1px solid $color-text-black100;
   border-radius: 8px;
   overflow: hidden;
 
   &__icon {
-    color: var(--color-gray);
+    color: $color-text-black200;
     margin-left: 1.3rem;
   }
   &__input {
@@ -176,7 +181,7 @@ textarea {
   flex-direction: column;
   margin: 2.4rem 0;
   &__label {
-    color: #4f4f4f;
+    color: $color-text-black200;
     font-size: 1.3rem;
     font-weight: 500;
     margin-bottom: 4px;
@@ -262,7 +267,7 @@ textarea {
     justify-content: space-between;
     align-items: center;
     padding: 3.2rem 4.8rem;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: $border;
     @media only screen and (max-width: 900px) {
       padding: 3.2rem 2.4rem;
       border: none;
@@ -274,9 +279,9 @@ textarea {
         padding: 8px 0;
         border-radius: 1.2rem;
         background-color: inherit;
-        color: var(--color-gray);
+        color: $color-text-black200;
         font-weight: 500;
-        border: 1px solid currentColor;
+        border: 1px solid $color-text-black200;
       }
     }
   }
@@ -287,14 +292,14 @@ textarea {
   flex-direction: column;
   margin-right: 4.8rem;
   &__main {
-    color: black;
+    color: $color-text;
     font-size: 2.4rem;
     margin-bottom: 4px;
   }
   &__sub {
     font-size: 1.3rem;
     font-weight: 500;
-    color: var(--color-gray);
+    color: $color-text-black200;
   }
 }
 
@@ -305,7 +310,7 @@ textarea {
   margin: auto;
   margin-bottom: 6.4rem;
   width: 700px;
-  border: 1px solid #e0e0e0;
+  border: $border;
   border-radius: 1.2rem;
   @media only screen and (max-width: 900px) {
     border: none;
@@ -324,7 +329,7 @@ textarea {
     padding: 1.6rem 2.4rem;
   }
   &:not(:last-child) {
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: $border;
   }
   &__label-box {
     flex: 1;
@@ -333,7 +338,7 @@ textarea {
       text-transform: uppercase;
       font-size: 1.3rem;
       font-weight: 500;
-      color: #bdbdbd;
+      color: $color-text-black200;
       @media only screen and (max-width: 900px) {
         margin-left: 0;
       }
@@ -380,7 +385,7 @@ textarea {
     & input,
     & textarea {
       &::placeholder {
-        color: #bdbdbd;
+        color: $color-text-black200;
       }
     }
     &__upload {
@@ -413,7 +418,7 @@ textarea {
         margin-left: 2.4rem;
         font-size: 1.3rem;
         font-weight: 500;
-        color: #828282;
+        color: $color-text-black200;
       }
     }
   }
@@ -436,6 +441,7 @@ textarea {
     }
     &__text {
       color: #2d9cdb;
+      cursor: pointer;
     }
   }
 }
@@ -446,7 +452,7 @@ textarea {
   right: 0;
   top: calc(100% + 1.6rem);
   min-width: 19rem;
-  background-color: $color-chat;
+  background-color: $color-black400;
   border: $border;
   box-shadow: 0px 2px 4px 0px #0000000d;
   border-radius: 1.2rem;

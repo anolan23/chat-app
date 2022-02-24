@@ -8,7 +8,7 @@ interface Props {
 function UserItem({ user }: Props) {
   return (
     <div className="user-item">
-      <Avatar className="user-item__avatar" src={user.photo || '/'} />
+      <Avatar className="user-item__avatar" src={user.photo} />
       <span className="user-item__name">{user.name}</span>
     </div>
   );

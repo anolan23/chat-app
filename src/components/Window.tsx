@@ -1,4 +1,4 @@
-import { ReactComponent as Logo } from '../images/devchallenges.svg';
+import { ReactComponent as Logo } from '../images/devchallenges-light.svg';
 
 interface Props {
   heading: string;
