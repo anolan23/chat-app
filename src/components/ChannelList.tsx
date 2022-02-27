@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useStore from '../context';
 import { useActions } from '../hooks/useActions';
@@ -9,6 +9,7 @@ import { SidebarMode } from '../types';
 
 function ChannelList() {
   const [{ channels }] = useStore();
+  const [query, setQuery] = useState('');
   const navigate = useNavigate();
   const { setShowAddChannelPopup, setMode } = useActions();
 
@@ -17,16 +18,24 @@ function ChannelList() {
     navigate(`/channels/${channel.id}`);
   };
 
+  const onChange = function (e: React.ChangeEvent<HTMLInputElement>): void {
+    setQuery(e.target.value);
+  };
+
   const renderChannels = function () {
-    return channels.map((channel: Channel, index) => {
-      return (
-        <ChannelItem
-          key={index}
-          channel={channel}
-          onClick={() => onChannelClick(channel)}
-        />
-      );
-    });
+    return channels
+      .filter((channel) =>
+        channel.name?.toLowerCase().includes(query.toLowerCase())
+      )
+      .map((channel: Channel, index) => {
+        return (
+          <ChannelItem
+            key={index}
+            channel={channel}
+            onClick={() => onChannelClick(channel)}
+          />
+        );
+      });
   };
   return (
     <React.Fragment>
@@ -48,6 +57,7 @@ function ChannelList() {
           className="channel-list-sidebar__search"
           icon="search"
           placeholder="Search"
+          onChange={onChange}
         />
       </div>
       <div className="sidebar__content">
