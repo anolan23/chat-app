@@ -9,6 +9,7 @@ export default function reducer(state: State, action: Action): State {
         ...state,
         channel: action.payload,
         channels: [...state.channels, action.payload],
+        mode: SidebarMode.memberList,
       };
     case ActionType.fetchAllChannels:
       return { ...state, channels: action.payload };
