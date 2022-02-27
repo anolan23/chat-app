@@ -2,7 +2,7 @@ import useStore from '../context';
 import axios from 'axios';
 
 import { Credentials } from '../types/user';
-import { ActionType, Channel, Message, User } from '../types';
+import { ActionType, Channel, Message, SidebarMode, User } from '../types';
 
 export function useActions() {
   const [{ socket }, dispatch] = useStore();
@@ -83,10 +83,14 @@ export function useActions() {
     dispatch({ type: ActionType.setShowAddChannelPopup, payload: show });
   }
 
-  async function createChannel(channel: Channel) {
+  async function createChannel(
+    channel: Channel,
+    callback: (channel: Channel) => void
+  ) {
     try {
-      const response = await axios.post('/api/channels', channel);
+      const response = await axios.post<Channel>('/api/channels', channel);
       dispatch({ type: ActionType.createChannel, payload: response.data });
+      callback(response.data);
     } catch (error) {
       throw error;
     }
@@ -130,6 +134,10 @@ export function useActions() {
     dispatch({ type: ActionType.addMessage, payload: message });
   }
 
+  function setMessages(messages: Message[]): void {
+    dispatch({ type: ActionType.setMessages, payload: messages });
+  }
+
   async function fetchMessagesByChannelId(channelId: number) {
     try {
       const response = await axios.get<Message[]>('/api/messages', {
@@ -157,6 +165,9 @@ export function useActions() {
     dispatch({ type: ActionType.setMembers, payload: members });
   }
 
+  function setMode(mode: SidebarMode): void {
+    dispatch({ type: ActionType.setMode, payload: mode });
+  }
   return {
     autoLogin,
     updateUser,
@@ -172,8 +183,10 @@ export function useActions() {
     fetchMessagesByChannelId,
     sendMessage,
     addMessage,
+    setMessages,
     join,
     setMembers,
     fetchChannel,
+    setMode,
   };
 }

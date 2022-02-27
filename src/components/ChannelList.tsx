@@ -7,17 +7,12 @@ import ChannelItem from './ChannelItem';
 import Input from './Input';
 import { SidebarMode } from '../types';
 
-interface Props {
-  setMode: React.Dispatch<React.SetStateAction<SidebarMode>>;
-}
-
-function ChannelList({ setMode }: Props) {
+function ChannelList() {
   const [{ channels }] = useStore();
   const navigate = useNavigate();
-  const { setChannel, setShowAddChannelPopup } = useActions();
+  const { setShowAddChannelPopup, setMode } = useActions();
 
   const onChannelClick = function (channel: Channel) {
-    setChannel({});
     setMode(SidebarMode.memberList);
     navigate(`/channels/${channel.id}`);
   };

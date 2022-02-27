@@ -5,6 +5,7 @@ import channelReducer from './channelReducer';
 import modalReducer from './modalReducer';
 import messagesReducer from './messagesReducer';
 import membersReducer from './membersReducer';
+import modeReducer from './modeReducer';
 
 function combineReducers(
   ...reducers: any
@@ -21,5 +22,6 @@ export default combineReducers(
   channelReducer,
   modalReducer,
   messagesReducer,
-  membersReducer
+  membersReducer,
+  modeReducer
 );

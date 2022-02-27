@@ -1,15 +1,14 @@
 import UserToggle from './UserToggle';
 import { SidebarMode } from '../types';
 import useStore from '../context/index';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import MemberList from './MemberList';
 import ChannelList from './ChannelList';
 import { useActions } from '../hooks/useActions';
 
 function Sidebar() {
-  const [{ user }] = useStore();
-  const { fetchAllChannels } = useActions();
-  const [mode, setMode] = useState(SidebarMode.memberList);
+  const [{ user, mode }] = useStore();
+  const { fetchAllChannels, setMode } = useActions();
 
   useEffect(() => {
     fetchAllChannels();
@@ -22,7 +21,7 @@ function Sidebar() {
           <MemberList onBarClick={() => setMode(SidebarMode.channelList)} />
         );
       case SidebarMode.channelList:
-        return <ChannelList setMode={setMode} />;
+        return <ChannelList />;
       default:
         break;
     }

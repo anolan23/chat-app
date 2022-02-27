@@ -1,4 +1,5 @@
 import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
 
 import { useActions } from '../hooks/useActions';
 import { Channel, User } from '../types';
@@ -13,15 +14,18 @@ interface Props {
 }
 function NewChannelPopup({ show, close, user }: Props) {
   const { createChannel } = useActions();
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       name: '',
       description: '',
     },
-    async onSubmit(channel: Channel, { resetForm }) {
+    onSubmit(channel: Channel, { resetForm }) {
       try {
         if (!user.id) return;
-        await createChannel({ ...channel, user_id: user.id });
+        createChannel({ ...channel, user_id: user.id }, (channel) => {
+          navigate(`/channels/${channel.id}`);
+        });
         resetForm();
       } catch (error) {
         console.error(error);

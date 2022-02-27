@@ -1,16 +1,13 @@
 import React, { createContext, useContext, useReducer } from 'react';
 import { io, Socket } from 'socket.io-client';
 
-import { User, Channel, Action, Message } from '../types';
+import { User, Channel, Action, Message, SidebarMode } from '../types';
 import reducers from '../reducers';
 
 interface ServerToClientEvents {
   message: (message: Message, callback: (message: Message) => void) => void;
   action: (message: string) => void;
   members: (members: User[]) => void;
-  noArg: () => void;
-  basicEmit: (a: number, b: string, c: Buffer) => void;
-  withAck: (d: string, callback: (e: number) => void) => void;
 }
 
 interface ClientToServerEvents {
@@ -29,6 +26,7 @@ export interface State {
   channels: Channel[];
   messages: Message[];
   showAddChannelPopup: boolean;
+  mode: SidebarMode;
   socket: Socket<ServerToClientEvents, ClientToServerEvents>;
 }
 
@@ -45,6 +43,7 @@ const initialState: State = {
   channels: [],
   messages: [],
   showAddChannelPopup: false,
+  mode: SidebarMode.channelList,
   socket: io(),
 };
 

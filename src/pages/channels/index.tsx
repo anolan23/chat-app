@@ -21,6 +21,8 @@ function Channels() {
     join,
     setMembers,
     fetchChannel,
+    setChannel,
+    setMessages,
   } = useActions();
 
   useEffect(() => {
@@ -33,7 +35,6 @@ function Channels() {
     });
 
     socket.on('members', (members) => {
-      console.log(members);
       setMembers(members);
     });
   }, []);
@@ -42,10 +43,14 @@ function Channels() {
     if (!id) return;
     fetchChannel(+id);
     fetchMessagesByChannelId(+id);
+    return () => {
+      setChannel({});
+      setMessages([]);
+    };
   }, [id]);
 
   useEffect(() => {
-    if (!id || !user) return;
+    if (!id || !Object.keys(user).length) return;
     join(user, +id);
   }, [user, id]);
 

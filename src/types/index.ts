@@ -23,6 +23,8 @@ export enum ActionType {
   addMessage,
   setMembers,
   fetchChannel,
+  setMode,
+  setMessages,
 }
 export interface Action {
   type: ActionType;

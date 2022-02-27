@@ -1,5 +1,5 @@
 import { State } from '../context';
-import { Action, ActionType } from '../types';
+import { Action, ActionType, SidebarMode } from '../types';
 export default function reducer(state: State, action: Action): State {
   switch (action.type) {
     case ActionType.setChannel:
@@ -13,7 +13,11 @@ export default function reducer(state: State, action: Action): State {
     case ActionType.fetchAllChannels:
       return { ...state, channels: action.payload };
     case ActionType.fetchChannel:
-      return { ...state, channel: action.payload };
+      return {
+        ...state,
+        channel: action.payload,
+        mode: SidebarMode.memberList,
+      };
     default:
       return state;
   }
