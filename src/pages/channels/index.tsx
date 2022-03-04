@@ -23,6 +23,7 @@ function Channels() {
     fetchChannel,
     setChannel,
     setMessages,
+    setShowSidebar,
   } = useActions();
 
   useEffect(() => {
@@ -43,6 +44,7 @@ function Channels() {
     if (!id) return;
     fetchChannel(+id);
     fetchMessagesByChannelId(+id);
+    setShowSidebar(false);
     return () => {
       setChannel({});
       setMessages([]);
@@ -70,6 +72,12 @@ function Channels() {
       <Sidebar />
       <main className="channels__main">
         <div className="channels__bar">
+          <span
+            className="material-icons channels__bar__menu"
+            onClick={() => setShowSidebar(true)}
+          >
+            menu
+          </span>
           <span className="channels__bar__text">{channel.name}</span>
         </div>
         <div className="channels__chat" ref={chatListRef}>

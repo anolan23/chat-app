@@ -25,6 +25,7 @@ export enum ActionType {
   fetchChannel,
   setMode,
   setMessages,
+  setShowSidebar,
 }
 export interface Action {
   type: ActionType;

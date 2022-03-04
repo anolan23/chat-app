@@ -6,6 +6,9 @@
   background-color: #3c393f;
   border-radius: 8px;
 
+  @media only screen and (max-width: 950px) {
+    margin: 3.2rem;
+  }
   & input {
     flex: 1;
     margin-left: 1.8rem;

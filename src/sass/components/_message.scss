@@ -7,6 +7,10 @@
   &:hover {
     background-color: $color-chat-hover;
   }
+
+  @media only screen and (max-width: 950px) {
+    padding: 3.2rem;
+  }
   &__avatar {
     height: 42px;
     width: 42px;
@@ -21,6 +25,9 @@
     &__info {
       margin-bottom: 8px;
       color: #828282;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     &__text {
     }

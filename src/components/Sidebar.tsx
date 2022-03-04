@@ -7,8 +7,8 @@ import ChannelList from './ChannelList';
 import { useActions } from '../hooks/useActions';
 
 function Sidebar() {
-  const [{ user, mode }] = useStore();
-  const { fetchAllChannels, setMode } = useActions();
+  const [{ user, mode, showSidebar }] = useStore();
+  const { fetchAllChannels, setMode, setShowSidebar } = useActions();
 
   useEffect(() => {
     fetchAllChannels();
@@ -28,7 +28,7 @@ function Sidebar() {
   };
 
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar ${!showSidebar ? 'sidebar__closed' : ''}`}>
       {renderList()}
       <div className="sidebar__footer">
         <UserToggle
@@ -37,6 +37,9 @@ function Sidebar() {
           direction="up"
         />
       </div>
+      <button className="sidebar__close" onClick={() => setShowSidebar(false)}>
+        <span className="material-icons">close</span>
+      </button>
     </aside>
   );
 }

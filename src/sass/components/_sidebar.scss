@@ -1,8 +1,50 @@
 .sidebar {
+  position: relative;
   display: flex;
   flex-direction: column;
   background-color: #120f13;
-  overflow-y: hidden;
+  // overflow-y: hidden;
+
+  @media only screen and (max-width: 950px) {
+    position: absolute;
+
+    top: 0;
+    right: 75px;
+    left: 0;
+    bottom: 0;
+    z-index: 10;
+  }
+
+  &__closed {
+    @media only screen and (max-width: 950px) {
+      display: none;
+    }
+  }
+
+  &__close {
+    background-color: $color-black200;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    top: 6px;
+    right: -60px;
+    padding: 1.2rem;
+    border: none;
+
+    border-radius: 1.2rem;
+    cursor: pointer;
+    @media only screen and (min-width: 950px) {
+      display: none;
+    }
+
+    & span {
+      color: white;
+      font-size: 2.4rem;
+      font-weight: 700;
+    }
+  }
   &__bar {
     display: flex;
     align-items: center;
@@ -36,10 +78,16 @@
         font-weight: 700;
         color: #828282;
         margin-left: 3.2rem;
+        @media only screen and (max-width: 550px) {
+          display: block;
+        }
       }
       & .user-toggle__icon {
         color: #bdbdbd;
         margin-left: auto;
+        @media only screen and (max-width: 550px) {
+          display: block;
+        }
       }
     }
   }

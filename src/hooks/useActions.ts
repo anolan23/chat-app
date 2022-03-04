@@ -83,6 +83,10 @@ export function useActions() {
     dispatch({ type: ActionType.setShowAddChannelPopup, payload: show });
   }
 
+  function setShowSidebar(show: boolean): void {
+    dispatch({ type: ActionType.setShowSidebar, payload: show });
+  }
+
   async function createChannel(
     channel: Channel,
     callback: (channel: Channel) => void
@@ -188,5 +192,6 @@ export function useActions() {
     setMembers,
     fetchChannel,
     setMode,
+    setShowSidebar,
   };
 }

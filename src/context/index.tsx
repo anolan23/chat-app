@@ -26,6 +26,7 @@ export interface State {
   channels: Channel[];
   messages: Message[];
   showAddChannelPopup: boolean;
+  showSidebar: boolean;
   mode: SidebarMode;
   socket: Socket<ServerToClientEvents, ClientToServerEvents>;
 }
@@ -43,6 +44,7 @@ const initialState: State = {
   channels: [],
   messages: [],
   showAddChannelPopup: false,
+  showSidebar: false,
   mode: SidebarMode.channelList,
   socket: io(),
 };
