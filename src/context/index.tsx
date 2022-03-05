@@ -53,7 +53,6 @@ const StoreContext = createContext<Store>([initialState, () => null]);
 
 export function UserProvider({ children }: Props) {
   const [state, dispatch] = useReducer(reducers, initialState);
-
   return (
     <StoreContext.Provider value={[state, dispatch]}>
       {children}

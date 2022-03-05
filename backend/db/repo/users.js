@@ -1,4 +1,4 @@
-const db = require('..');
+const db = require('../index.js');
 class Users {
   static async findOne(id) {
     try {

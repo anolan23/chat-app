@@ -1,6 +1,6 @@
 const express = require('express');
 
-const Messages = require('../db/repo/Messages');
+const Messages = require('../db/repo/Messages.js');
 
 const router = express.Router();
 

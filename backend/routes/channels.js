@@ -1,6 +1,6 @@
 const express = require('express');
 
-const Channels = require('../db/repo/Channels');
+const Channels = require('../db/repo/Channels.js');
 
 const router = express.Router();
 

@@ -65,6 +65,11 @@
     justify-content: center;
     height: 75px;
     background-color: #0b090c;
+    &__actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.6rem;
+    }
     &__toggle {
       width: 100%;
       padding: 0 3.2rem;
