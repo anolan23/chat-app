@@ -1,7 +1,7 @@
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 
-const Users = require('../db/repo/users');
+const Users = require('../db/repo/Users');
 
 const googleStrategy = new GoogleStrategy(
   {

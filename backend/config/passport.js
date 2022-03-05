@@ -2,7 +2,7 @@ const JwtStrategy = require('passport-jwt').Strategy;
 
 const cookie = require('cookie');
 
-const Users = require('../db/repo/users.js');
+const Users = require('../db/repo/Users');
 
 function cookieExtractor(req) {
   let token = null;
