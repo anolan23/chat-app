@@ -43,33 +43,6 @@ class Users {
     }
   }
 
-  static async FBfindOrCreate({ photo, name, email, facebook_id }) {
-    try {
-      const { rows } = await db.query(
-        `
-        WITH cte AS (
-          INSERT INTO users (email, photo, name, facebook_id)
-          VALUES ($1, $2, $3, $4)
-          ON CONFLICT (facebook_id, email) DO NOTHING
-          RETURNING *
-       )
-       SELECT *
-       FROM cte
-       WHERE EXISTS (SELECT 1 FROM cte)
-       UNION ALL
-       SELECT *
-       FROM users 
-       WHERE facebook_id = $4
-         AND NOT EXISTS (SELECT 1 FROM cte);
-        `,
-        [email, photo, name, facebook_id]
-      );
-      return rows[0];
-    } catch (error) {
-      throw error;
-    }
-  }
-
   static async update(id, cols) {
     let query = ['UPDATE users'];
     query.push('SET');

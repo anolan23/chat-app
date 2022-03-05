@@ -8,7 +8,7 @@ const usersRouter = require('./routes/users.js');
 const channelsRouter = require('./routes/channels.js');
 const messagesRouter = require('./routes/messages.js');
 const photosRouter = require('./routes/photos.js');
-const { googleStrategy, facebookStrategy } = require('./config/strategies');
+const { googleStrategy } = require('./config/strategies');
 const { Server } = require('socket.io');
 const Messages = require('./db/repo/Messages.js');
 const {
@@ -28,7 +28,6 @@ const html = path.join(__dirname, '..', 'build', 'index.html');
 
 require('./config/passport.js')(passport);
 passport.use(googleStrategy);
-passport.use(facebookStrategy);
 
 app.use(passport.initialize());
 app.use(express.json());
