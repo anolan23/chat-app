@@ -11,7 +11,7 @@ export function dateString(created_at: string): string {
 
   const difference = Date.now() - date.valueOf();
   return date.toLocaleDateString(undefined, {
-    weekday: 'long',
+    weekday: 'short',
     year: 'numeric',
     month: 'short',
     day: 'numeric',
