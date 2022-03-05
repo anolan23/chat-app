@@ -3,7 +3,7 @@ const passport = require('passport');
 
 const { authorize } = require('../config/middlewares');
 const db = require('../db');
-const Users = require('../db/repo/Users.js');
+const Users = require('../db/repo/Userss');
 
 const router = express.Router();
 
