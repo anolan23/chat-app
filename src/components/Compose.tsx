@@ -13,7 +13,7 @@ function Compose() {
   ) {
     try {
       event.preventDefault();
-      if (!user.id || !channel.id) return;
+      if (!user.id || !channel.id || !body) return;
       const message: Message = {
         user_id: user.id,
         channel_id: channel.id,
@@ -31,15 +31,23 @@ function Compose() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="compose">
+    <form
+      onSubmit={handleSubmit}
+      className={`compose ${!user.isSignedIn ? 'compose--disabled' : ''}`}
+    >
       <input
         className="compose__input"
         placeholder="Type a message here"
         spellCheck="false"
         value={body}
         onChange={onChange}
+        disabled={!user.isSignedIn}
       />
-      <button type="submit" className="compose__btn">
+      <button
+        type="submit"
+        className="compose__btn"
+        disabled={!user.isSignedIn}
+      >
         <span className="material-icons compose__btn__icon">send</span>
       </button>
     </form>

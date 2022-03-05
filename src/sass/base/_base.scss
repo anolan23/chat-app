@@ -201,12 +201,23 @@ textarea {
   outline: none;
   cursor: pointer;
   transition: all 0.3s;
+
   &:hover {
     filter: brightness(90%);
   }
 
   &--extended {
     width: 100%;
+  }
+
+  &--darkest {
+    background-color: $color-black100;
+  }
+  &--darker {
+    background-color: $color-black200;
+  }
+  &--dark {
+    background-color: $color-black400;
   }
 }
 

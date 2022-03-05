@@ -26,7 +26,7 @@ module.exports = (passport) => {
         const user = await Users.findOne(id);
         if (!user) return done(null, false);
         delete user['password'];
-        return done(null, user);
+        return done(null, { ...user, isSignedIn: true });
       } catch (error) {
         done(error, false);
       }
